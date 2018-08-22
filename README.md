@@ -1,4 +1,4 @@
-# Node Skeleton
+# Jamie, Guy and Alex's Midterm Project
 
 ## Project Setup
 

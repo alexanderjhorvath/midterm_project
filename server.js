@@ -42,6 +42,7 @@ app.use("/api/users", usersRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
+  res.clearCookie('cookieName');
   res.render("index");
 });
 
@@ -67,6 +68,9 @@ app.get('/menu', (req, res) => {
   }
 })
 
+// Add item to cart
+app.put('/cart')
+
 // PUT - Update inventory
 app.put('/menu')
 
@@ -89,8 +93,6 @@ app.put('/orders/:id')
 // GET - User reviews order before submitting
 app.get('/confirmation')
 
-// Add item to cart
-app.put('/cart')
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

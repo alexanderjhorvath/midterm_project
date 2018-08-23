@@ -72,7 +72,9 @@ app.get('/menu', (req, res) => {
 })
 
 // Add item to cart
-app.put('/cart')
+app.put('/cart', (req, res) => {
+  
+})
 
 // PUT - Update inventory
 app.put('/menu')
@@ -83,7 +85,7 @@ app.get('/confirmation')
 
 // POST - Create order   
 app.post('/orders', (req, res) => {
-
+ // Passes in order array 
 })
 
 // GET - View order history

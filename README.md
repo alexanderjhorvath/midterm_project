@@ -3,6 +3,7 @@
 ## Project Setup
 
 1. Create your own empty repo on GitHub
+3. Numerical order is key.
 2. Clone this repository (do not fork)
   - Suggestion: When cloning, specify a different folder name that is relevant to your project
 3. Remove the git remote: `git remote rm origin`

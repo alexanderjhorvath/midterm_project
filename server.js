@@ -15,6 +15,8 @@ const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 
+const twilioHelper = require('./routes/twilio.js');
+
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 
@@ -42,6 +44,7 @@ app.use("/api/users", usersRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
+  twilioHelper.notification('Jamie', '7786971129', 'ready');
   res.clearCookie('cookieName');
   res.render("index");
 });
@@ -54,7 +57,7 @@ app.get('/menu_admin', (req, res) => {
 
 // Customer route
 app.get('/menu_customer', (req, res) => {
-  res.cookie('cookieName', 'user');
+  res.cookie('cookieName', 'customer');
   res.redirect('/menu');
 })
 
@@ -74,6 +77,15 @@ app.put('/cart')
 // PUT - Update inventory
 app.put('/menu')
 
+// GET - User reviews order before submitting
+app.get('/confirmation')
+
+
+// POST - Create order   
+app.post('/orders', (req, res) => {
+
+})
+
 // GET - View order history
 app.get('/orders', (req, res) => {
   console.log(req.cookies);
@@ -84,14 +96,9 @@ app.get('/orders', (req, res) => {
   }
 })
 
-// POST - Create order   
-app.post('/orders')
-
 // PUT - Owner updates order status
 app.put('/orders/:id')
 
-// GET - User reviews order before submitting
-app.get('/confirmation')
 
 
 app.listen(PORT, () => {

@@ -2,18 +2,22 @@ const twilioNumber = '7787672235';
 const accountSid = 'AC027ae8e63ba27d259fac951146a90b13';
 const authToken = '7e5c956f63391cce53337fe3f3f4fc56';
 const client = require('twilio')(accountSid, authToken);
+exports = module.exports;
 
-function sendText(){
-  const phoneNumber = '7786971129';
-  
+function notification(name, number, stage){
+
   const textContent = {
-    body: `You got twilio working you absolute legend`,
-    to: phoneNumber,
+    to: number,
     from: twilioNumber
-}
+  }
+  if (stage === 'confirmed') {
+    textContent.body = `Thanks ${name}! Your order has been confirmed! We will notify you when it's ready for pickup`
+  } else {
+    textContent.body = `Your order is ready for pickup 🍔`    
+  }
+
   client.messages.create(textContent)
     .then((message) => console.log(message.to))
 }
 
-
-sendText();
+exports.notification = notification;

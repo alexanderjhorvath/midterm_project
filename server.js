@@ -44,7 +44,7 @@ app.use("/api/users", usersRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
-  twilioHelper.notification('Jamie', '7786971129', 'ready');
+  // twilioHelper.notification('Jamie', '7786971129', 'ready');
   res.clearCookie('cookieName');
   res.render("index");
 });
@@ -61,7 +61,7 @@ app.get('/menu_customer', (req, res) => {
   res.redirect('/menu');
 })
 
-// GET - Menu page 
+// GET - Menu page
 app.get('/menu', (req, res) => {
   console.log(req.cookies);
   if (req.cookies.cookieName = 'admin') {
@@ -84,9 +84,9 @@ app.get('/confirmation', (req, res) => {
 })
 
 
-// POST - Create order   
+// POST - Create order
 app.post('/orders', (req, res) => {
- // Passes in order array 
+ // Passes in order array
 })
 
 // GET - View order history

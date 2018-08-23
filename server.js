@@ -73,14 +73,15 @@ app.get('/menu', (req, res) => {
 
 // Add item to cart
 app.put('/cart', (req, res) => {
-  
 })
 
 // PUT - Update inventory
 app.put('/menu')
 
 // GET - User reviews order before submitting
-app.get('/confirmation')
+app.get('/confirmation', (req, res) => {
+  res.render('confirmation');
+})
 
 
 // POST - Create order   
@@ -100,7 +101,6 @@ app.get('/orders', (req, res) => {
 
 // PUT - Owner updates order status
 app.put('/orders/:id')
-
 
 
 app.listen(PORT, () => {

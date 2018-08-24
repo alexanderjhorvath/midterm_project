@@ -24,12 +24,13 @@ exports = module.exports;
 // newOrder();
 
 function getItems() {
-  knex.select('*')
+  return knex.select('*')
     .from('menu_items')
     .then(function(rows) {
       return rows;
     })
-}
+    .catch((err) => { console.log( err); throw err })
+};
 
 exports.getItems = getItems;
 

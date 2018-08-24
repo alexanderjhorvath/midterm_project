@@ -63,14 +63,43 @@ app.get('/menu_customer', (req, res) => {
   res.redirect('/menu');
 })
 
+
+
+function compare(a, b) {
+  const categoryA = a.category.toUpperCase();
+  const categoryB = b.category.toUpperCase();
+  let comparison = 0;
+  if (genreA > genreB) {
+    comparison = 1;
+  } else if (genreA < genreB) {
+    comparison = -1;
+  }
+  return comparison;
+}
+
+
 // GET - Menu page
 app.get('/menu', (req, res) => {
-  dbHelpers.getItems();
   // Renders admin or user page based on user's cookie
   if (req.cookies.cookieName === 'admin') {
-    res.render('menu_admin');
+    let menuArray = [];
+
+    dbHelpers.getItems()
+    .then(function(result) {
+      result.forEach(function(item) {
+        menuArray.push(item);
+      })
+        console.log(menuArray);
+        let templateVars = { test : menuArray }
+        res.render('menu', templateVars);
+    });
+
+
+
   } else {
     res.render('test');
+    console.log(dbHelpers.getItems());
+    console.log('hi');
   }
 })
 

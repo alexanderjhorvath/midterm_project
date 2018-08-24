@@ -1,13 +1,3 @@
-// $(() => {
-//   $.ajax({
-//     method: "GET",
-//     url: "/api/users"
-//   }).done((users) => {
-//     for(user of users) {
-//       $("<div>").text(user.name).appendTo($("body"));
-//     }
-//   });;
-// });
 $(document).ready(function() {
 
   // Appends menu item to container based on what category it belongs to
@@ -56,9 +46,9 @@ $(document).ready(function() {
 
 // Code for creating the Compose button and revealing the new tweet box
   $( "#new_item_header").click(function() {
-    console.log("clicked header!");
+        console.log("clicked header privately!");
     if ( $( "#new_item").is( ":hidden") ) {
-      $( "#new_item").slideDown( "400", function() {
+      $( "#new_item").slideToggle( "400", function() {
         $( "#name").focus();
       });
     } else {

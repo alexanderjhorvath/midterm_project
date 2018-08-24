@@ -52,17 +52,20 @@ app.get("/", (req, res) => {
 // Admin route
 app.get('/menu_admin', (req, res) => {
   res.cookie('cookieName', 'admin');
+  console.log("Admin cookie created");
   res.redirect('/menu');
 })
 
 // Customer route
 app.get('/menu_customer', (req, res) => {
   res.cookie('cookieName', 'customer');
+  console.log("boring customer cookie created");
   res.redirect('/menu');
 })
 
 // GET - Menu page
 app.get('/menu', (req, res) => {
+  console.log("Cookie:", req.cookies.cookieName);
   if (req.cookies.cookieName = 'admin') {
     res.render('menu_admin');
   } else {

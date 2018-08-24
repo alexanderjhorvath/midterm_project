@@ -52,16 +52,12 @@ $(document).ready(function() {
       $text.html(insert);
       return $text;
   }
-})
 
-// Code for creating the Compose button and revealing the new tweet box
-  $( "#new_item_header").click(function() {
-    console.log("clicked header!");
-    if ( $( "#new_item").is( ":hidden") ) {
-      $( "#new_item").slideDown( "400", function() {
-        $( "#name").focus();
-      });
-    } else {
-      $( ".new_tweet" ).slideUp( "400" );
-    }
-  });
+  // // Code for creating the Compose button and revealing the new tweet box
+  // $("#new_item_header").click(function() {
+  //   console.log("clicked header!");
+  //     $( "#new_item").slideToggle( "400", function() {
+  //       $( "#name").focus();
+  //     });
+  // });
+})

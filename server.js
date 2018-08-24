@@ -16,6 +16,7 @@ const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 
 const twilioHelper = require('./routes/twilio.js');
+const dbHelpers = require('./data-helpers/index.js')
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -64,7 +65,8 @@ app.get('/menu_customer', (req, res) => {
 
 // GET - Menu page
 app.get('/menu', (req, res) => {
- // Renders admin or user page based on user's cookie
+  dbHelpers.getItems();
+  // Renders admin or user page based on user's cookie
   if (req.cookies.cookieName === 'admin') {
     res.render('menu_admin');
   } else {

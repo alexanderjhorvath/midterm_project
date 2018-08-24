@@ -1,27 +1,37 @@
-const knexConfig  = require("./knexfile");
+const ENV         = process.env.ENV || "development";
+const knexConfig  = require("../knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 
-const criteria = process.argv.slice(2);
+exports = module.exports;
 
-const knex = require('./db_knex');
+// const testArray = [{menu id: }]
 
+// function newOrder(user, timePlaced, orderArray) {
+//   knex('orders')
+//     .insert({ user_id: user,
+//        date: timePlaced,
+//        time: timeplaced
+//      })
+//     .returning('id')
+//     .then(function(id){
+//       return knex.insert({order_id: id,
+//         menu_item_id: orderArray[0],
+//         quantity: orderArray[1]}).into('line_items');
+//     });
 
-function newOrder(user, timePlaced, orderArray) {
-  knex('orders')
-    .insert({ user_id: user,
-       date: timePlaced,
-       time: timeplaced
-     })
-    .returning('id')
-    .then(function(id){
-      return knex.insert({order_id: id,
-        menu_item_id: orderArray[0],
-        quantity: orderArray[1]}).into('line_items');
-    });
+// }
 
+// newOrder();
+
+function getItems() {
+  knex.select('*')
+    .from('menu_items')
+    .then(function(rows) {
+      return rows;
+    })
 }
 
-newOrder()
+exports.getItems = getItems;
 
 /*
 

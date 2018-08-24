@@ -92,7 +92,7 @@ app.post('/orders', (req, res) => {
 
 // GET - View order history
 app.get('/orders', (req, res) => {
-  if (req.cookies.cookieName = 'admin') {
+  if (req.cookies.cookieName === 'admin') {
     res.render('orders_admin');
   } else {
     res.render('orders');

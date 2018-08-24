@@ -64,8 +64,8 @@ app.get('/menu_customer', (req, res) => {
 })
 
 
-
-function compare(a, b) {
+// Helper function to sort menu items based on category
+function compareMenuItems(a, b) {
   const categoryA = a.category.toUpperCase();
   const categoryB = b.category.toUpperCase();
   let comparison = 0;
@@ -78,30 +78,30 @@ function compare(a, b) {
 }
 
 
-
 // GET - Menu page
 app.get('/menu', (req, res) => {
   // Renders admin or user page based on user's cookie
-  if (req.cookies.cookieName === 'admin') {
-    let menuArray = [];
+  let menuArray = [];
 
+  if (req.cookies.cookieName === 'admin') {
     dbHelpers.getItems()
     .then(function(result) {
       result.forEach(function(item) {
         menuArray.push(item);
       })
-        console.log(menuArray.sort(compare));
-        console.log(menuArray);
-        let templateVars = { test : menuArray.sort(compare) }
-        res.render('menu', templateVars);
+      let templateVars = { menuObj : menuArray.sort(compareMenuItems) }
+      res.render('menu_admin', templateVars);
     });
 
-
-
   } else {
-    res.render('test');
-    console.log(dbHelpers.getItems());
-    console.log('hi');
+      dbHelpers.getItems()
+      .then(function(result) {
+        result.forEach(function(item) {
+          menuArray.push(item);
+      })
+        let templateVars = { menuObj : menuArray.sort(compareMenuItems) }
+        res.render('menu', templateVars);
+      });
   }
 })
 

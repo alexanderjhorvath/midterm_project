@@ -39,3 +39,84 @@ textarea {
 // #new_item {
 //   display: none;
 // }
+
+article {
+  margin-top: 15px;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+}
+
+article:hover {
+  border-color: black;
+}
+
+article header {
+  background-color: #eee;
+  padding: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-color: darkgrey;
+}
+
+article:hover header {
+  background-color: lightgrey;
+}
+
+img.profile_pic {
+  position: relative;
+  float: left;
+  height: 50px;
+  width: 50px;
+  top: -1px;
+  opacity: 0.75;
+  border-radius: 5px;
+}
+
+article:hover .profile_pic {
+  opacity: 1;
+}
+
+.nickname {
+  position: relative;
+  float: right;
+  top: -3em;
+  right: 0.5em;
+  text-align: right;
+}
+
+.name {
+  position: relative;
+  color: darkgrey;
+  border-bottom-width: 0px;
+  padding-bottom: 20px;
+  padding-left: 60px;
+  margin: 0;
+}
+
+article:hover .name {
+  color: black;
+}
+
+article.tweet footer {
+  padding-left: 10px;
+  border-top-color: darkgrey;
+  border-top-width: 1px;
+  border-top-style: solid;
+}
+
+article.tweet p {
+  margin: 10px;
+}
+
+footer i {
+  position: relative;
+  float: right;
+  top: -1.5em;
+  right: 0.5em;
+  opacity: 0;
+}
+
+article:hover i {
+  opacity: 1;
+}

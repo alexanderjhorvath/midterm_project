@@ -70,7 +70,7 @@ app.get('/menu', (req, res) => {
   if (req.cookies.cookieName === 'admin') {
     res.render('menu_admin');
   } else {
-    res.render('test');
+    res.render('menu');
   }
 })
 

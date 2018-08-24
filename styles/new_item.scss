@@ -1,6 +1,6 @@
 @import 'variables';
 
-h2 {
+h4 {
   border-bottom: 1px solid black;
   margin-left: 5px;
   margin-right: 5px;
@@ -8,16 +8,11 @@ h2 {
 }
 
 .new_item {
-  background: $lgrey;
+  background: $white;
   margin-left: 2em;
   margin-right: 2em;
   border-radius: 5px;
   padding: 5px;
-}
-
-section.new_item:hover {
-  background: $grey;
-  color: black;
 }
 
 textarea {

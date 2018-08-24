@@ -26,6 +26,7 @@
   <body>
     <header>
       <% include ./partials/_header %>
+      <% include ./partials/_cart %>
     </header>
 <main class="container">
   <section class="new_item">
@@ -44,37 +45,6 @@
     </div>
   </div>
   </section>
-  <div class="container">
-  <div class="row">
-    <div class="col-sm">
-      <h3>Salads</h3>
-      <section class="salads">
-        <article class="salads">
-          <header>
-            <img class="item-photo" src="${photo}"></img>
-            <h3 class="item-name">Salad</h3>
-            <p class="item-price">3.99</p>
-          </header>
-          <p class="item-text">It's a salad</p>
-          <footer>
-            <button type="button" class="btn btn-info">Add to Cart</button>
-        </footer>
-        </article>
-        <section class="salads">
-          <article class="salads">
-            <header>
-              <img class="item-photo" src="${photo}"></img>
-              <h3 class="item-name">Fruit Salad</h3>
-              <p class="item-price">5.99</p>
-            </header>
-            <p class="item-text">It's a salad made from fruit!</p>
-            <footer>
-              <button type="button" class="btn btn-info">Add to Cart</button>
-          </footer>
-          </article>
-        </section>
-      </section>
-    </div>
       <% include ./partials/_menu %>
 </main>
   </body>

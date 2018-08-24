@@ -15,6 +15,11 @@ h2 {
   padding: 5px;
 }
 
+section.new_item:hover {
+  background: $grey;
+  color: black;
+}
+
 textarea {
   padding-top: 5px;
   padding-left: 5px;
@@ -52,7 +57,7 @@ article:hover {
 }
 
 article header {
-  background-color: #eee;
+  background-color: $lgrey;
   padding: 10px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -60,10 +65,10 @@ article header {
 }
 
 article:hover header {
-  background-color: lightgrey;
+  background-color: $grey;
 }
 
-img.profile_pic {
+img.item-photo {
   position: relative;
   float: left;
   height: 50px;
@@ -73,19 +78,19 @@ img.profile_pic {
   border-radius: 5px;
 }
 
-article:hover .profile_pic {
+article:hover .item-photo {
   opacity: 1;
 }
 
-.nickname {
+.item-price {
   position: relative;
   float: right;
-  top: -3em;
-  right: 0.5em;
+  top: -1.75em;
+  right: -1em;
   text-align: right;
 }
 
-.name {
+.item-name {
   position: relative;
   color: darkgrey;
   border-bottom-width: 0px;
@@ -94,18 +99,24 @@ article:hover .profile_pic {
   margin: 0;
 }
 
-article:hover .name {
+article:hover .item-name {
   color: black;
 }
 
-article.tweet footer {
-  padding-left: 10px;
+article:hover .item-price {
+  color: black;
+}
+
+article footer {
+  padding-bottom: 2px;
+  padding-top: 2px;
   border-top-color: darkgrey;
   border-top-width: 1px;
   border-top-style: solid;
+  text-align: center;
 }
 
-article.tweet p {
+article p {
   margin: 10px;
 }
 

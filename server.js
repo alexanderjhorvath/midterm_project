@@ -69,13 +69,14 @@ function compare(a, b) {
   const categoryA = a.category.toUpperCase();
   const categoryB = b.category.toUpperCase();
   let comparison = 0;
-  if (genreA > genreB) {
+  if (categoryA > categoryB) {
     comparison = 1;
-  } else if (genreA < genreB) {
+  } else if (categoryA < categoryB) {
     comparison = -1;
   }
   return comparison;
 }
+
 
 
 // GET - Menu page
@@ -89,8 +90,9 @@ app.get('/menu', (req, res) => {
       result.forEach(function(item) {
         menuArray.push(item);
       })
+        console.log(menuArray.sort(compare));
         console.log(menuArray);
-        let templateVars = { test : menuArray }
+        let templateVars = { test : menuArray.sort(compare) }
         res.render('menu', templateVars);
     });
 

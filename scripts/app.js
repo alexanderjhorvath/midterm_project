@@ -6,7 +6,7 @@ $(document).ready(function() {
 
   // Loads all menu items in database, called once on page load
   function loadAllMenuItems() {
-    $.getJSON('/tweets', function(data) {
+    $.getJSON('/menu', function(data) {
       renderMenuItems(data);
     });
   }

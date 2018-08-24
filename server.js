@@ -47,26 +47,25 @@ app.get("/", (req, res) => {
   // twilioHelper.notification('Jamie', '7786971129', 'ready');
   res.clearCookie('cookieName');
   res.render("index");
+
 });
 
 // Admin route
 app.get('/menu_admin', (req, res) => {
   res.cookie('cookieName', 'admin');
-  console.log("Admin cookie created");
   res.redirect('/menu');
 })
 
 // Customer route
 app.get('/menu_customer', (req, res) => {
   res.cookie('cookieName', 'customer');
-  console.log("boring customer cookie created");
   res.redirect('/menu');
 })
 
 // GET - Menu page
 app.get('/menu', (req, res) => {
-  console.log("Cookie:", req.cookies.cookieName);
-  if (req.cookies.cookieName = 'admin') {
+ // Renders admin or user page based on user's cookie
+  if (req.cookies.cookieName === 'admin') {
     res.render('menu_admin');
   } else {
     res.render('menu');

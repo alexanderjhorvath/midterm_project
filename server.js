@@ -70,9 +70,10 @@ app.get('/menu', (req, res) => {
   if (req.cookies.cookieName === 'admin') {
     res.render('menu_admin');
   } else {
-    res.render('menu');
+    res.render('test');
   }
 })
+
 
 // Add item to cart
 app.put('/cart', (req, res) => {

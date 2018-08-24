@@ -4,7 +4,61 @@ const knex        = require("knex")(knexConfig[ENV]);
 
 exports = module.exports;
 
-// const testArray = [{menu id: }]
+function getOrders(user) {
+  if (user === 'admin') {
+    return knex.select(
+    'orders.time',
+    'users.name AS username',
+    'users.phone_number',
+    'users.email',
+    'menu_items.name',
+    'menu_items.price',
+    'line_items.quantity',
+    'orders.order_status'
+    )
+    .from('orders')
+    .leftJoin('users', 'orders.user_id', 'users.id')
+    .leftJoin('line_items', 'orders.id', 'line_items.order_id')
+    .leftJoin('menu_items', 'line_items.menu_item_id', 'menu_items.id')
+    .then(function(rows) {
+      console.log(rows);
+      return rows;
+    })
+  } else {
+    return knex.select(
+    'orders.time',
+    'menu_items.name',
+    'menu_items.price',
+    'line_items.quantity',
+    'orders.order_status'
+    )
+    .from('orders')
+    .where({'user_id': user})
+    .leftJoin('line_items', 'orders.id', 'line_items.order_id')
+    .leftJoin('menu_items', 'line_items.menu_item_id', 'menu_items.id')
+    .then(function(rows) {
+      return rows;
+    })
+  }
+}
+
+const resultOfGetOrders = getOrders('admin')
+console.log('Result', typeof resultOfGetOrders);
+
+exports.getOrders = getOrders;
+
+
+function getItems() {
+  return knex.select('*')
+    .from('menu_items')
+    .then(function(rows) {
+      return rows;
+    })
+}
+
+exports.getItems = getItems;
+
+
 
 // function newOrder(user, timePlaced, orderArray) {
 //   knex('orders')
@@ -22,16 +76,6 @@ exports = module.exports;
 // }
 
 // newOrder();
-
-function getItems() {
-  knex.select('*')
-    .from('menu_items')
-    .then(function(rows) {
-      return rows;
-    })
-}
-
-exports.getItems = getItems;
 
 /*
 

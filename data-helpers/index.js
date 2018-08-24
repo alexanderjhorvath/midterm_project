@@ -1,10 +1,10 @@
 const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 
-const criteria = process.argv.slice(2);
 
 const knex = require('./db_knex');
 
+const testArray = [{menu id: }]
 
 function newOrder(user, timePlaced, orderArray) {
   knex('orders')
@@ -21,7 +21,7 @@ function newOrder(user, timePlaced, orderArray) {
 
 }
 
-newOrder()
+newOrder();
 
 /*
 

@@ -45,8 +45,7 @@ $(document).ready(function() {
         <h2 class="item-name">${name}</h2>
         <img class="item-photo" src="${photo}"></img>
         <p class="item-text">${description}</p>
-        <p class="item-price>${price}</p>
-        <p class="item-inventory">${inventory}</p>
+        <p class="item-price">${price}</p>
       </article>
     `
       $text.html(insert);

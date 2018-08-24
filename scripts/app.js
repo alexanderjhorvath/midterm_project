@@ -1,7 +1,11 @@
 $(document).ready(function() {
 
-  function renderMenuItems(input) {
-
+  // Appends menu item to container based on what category it belongs to
+  function renderMenuItems(item, category) {
+    item.forEach(function(input) {
+      let $menuItem = createMenuItems(input);
+      $(`.${category}`).append($menuItem);
+    });
   }
 
   // Loads all menu items in database, called once on page load
@@ -35,7 +39,6 @@ $(document).ready(function() {
         <p class="item-inventory">${inventory}</p>
       </article>
     `
-
       $text.html(insert);
       return $text;
   }

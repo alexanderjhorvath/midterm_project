@@ -1,10 +1,14 @@
-const knexConfig  = require("./knexfile");
+// const knexConfig  = require("./knexfile.js");
+// const knex        = require("knex")(knexConfig[ENV]);
+// const knex = require('./db_knex');
+
+const ENV         = process.env.ENV || "development";
+const knexConfig  = require("../knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 
+exports = module.exports;
 
-const knex = require('./db_knex');
-
-const testArray = [{menu id: }]
+// const testArray = [{menu id: }]
 
 function newOrder(user, timePlaced, orderArray) {
   knex('orders')
@@ -21,7 +25,18 @@ function newOrder(user, timePlaced, orderArray) {
 
 }
 
-newOrder();
+// newOrder();
+
+function getItems() {
+  knex.select('*')
+    .from('menu_items')
+    .then(function(rows) {
+      return rows;
+    })
+}
+
+
+exports.getItems = getItems;
 
 /*
 

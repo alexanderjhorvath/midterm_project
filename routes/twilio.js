@@ -10,10 +10,13 @@ function notification(name, number, stage){
     to: number,
     from: twilioNumber
   }
-  if (stage === 'confirmed') {
-    textContent.body = `Thanks ${name}! Your order has been confirmed! We will notify you when it's ready for pickup`
-  } else {
-    textContent.body = `Your order is ready for pickup 🍔`    
+  
+  if (stage === 'placed') {
+    textContent.body = `You have a new order`;
+  } else if (stage === 'confirmed') {
+    textContent.body = `Thanks ${name}! Your order has been confirmed! We will notify you when it's ready for pickup`;
+  } else if (stage === 'ready') {
+    textContent.body = `Your order is ready for pickup 🍔`;
   }
 
   client.messages.create(textContent)

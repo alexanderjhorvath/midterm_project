@@ -17,6 +17,8 @@ function notification(name, number, stage){
     textContent.body = `Thanks ${name}! Your order has been confirmed! We will notify you when it's ready for pickup`;
   } else if (stage === 'ready') {
     textContent.body = `Your order is ready for pickup 🍔`;
+  } else if (stage === 'picked up') {
+    textContent.body = `Thanks for shopping at Franklin's`;
   }
 
   client.messages.create(textContent)

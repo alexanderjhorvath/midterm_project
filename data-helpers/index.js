@@ -1,3 +1,4 @@
+
 const ENV         = process.env.ENV || "development";
 const knexConfig  = require("../knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
@@ -42,9 +43,6 @@ function getOrders(user) {
   }
 }
 
-const resultOfGetOrders = getOrders('admin')
-console.log('Result', typeof resultOfGetOrders);
-
 exports.getOrders = getOrders;
 
 
@@ -52,6 +50,7 @@ function getItems() {
   return knex.select('*')
     .from('menu_items')
     .then(function(rows) {
+      console.log("Type of rows = ", typeof rows);
       return rows;
     })
 }
@@ -59,23 +58,26 @@ function getItems() {
 exports.getItems = getItems;
 
 
+const order1 = [{menu_item_id: 7, quantity: 3}, {menu_item_id: 3, quantity: 2}];
 
-// function newOrder(user, timePlaced, orderArray) {
-//   knex('orders')
-//     .insert({ user_id: user,
-//        date: timePlaced,
-//        time: timeplaced
-//      })
-//     .returning('id')
-//     .then(function(id){
-//       return knex.insert({order_id: id,
-//         menu_item_id: orderArray[0],
-//         quantity: orderArray[1]}).into('line_items');
-//     });
+function newOrder(user, timePlaced, lineItems) {
+  return knex.insert({
+    user_id: user,
+    time: timePlaced,
+    order_status: "Placed"
+  })
+  .returning('id')
+  .into('orders')
+  .then(function([id]){
+    const lineItemsWithId = lineItems.map(lineItem => {
+      lineItem.order_id = id;
+      return lineItem;
+    });
+    return knex.insert(lineItemsWithId).into('line_items');
+  });
+}
 
-// }
-
-// newOrder();
+newOrder(2, '2018-08-24T14:39:07.318Z', order1);
 
 /*
 
@@ -84,5 +86,10 @@ menu page SELECT display all items
 menu page SELECT admin all items + UPDATE/delete
 orders user SELECT list of all orders by their id sorted into current and past
 orders admin SELECT list of all orders sorted into current and past AND UPDATE
+
+Placed
+In Progress
+Ready
+Picked up
 
 */

@@ -1,0 +1,68 @@
+@import 'variables';
+
+article {
+  margin-top: 15px;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  color: black;
+  h4 {
+    font-size: 1.25em;
+  }
+}
+
+article.active header{
+  background-color: $mint;
+  padding: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border: $dgrey 1px;
+}
+
+article.active:hover header {
+  background-color: $lmint;
+  border-color: black;
+}
+
+article.complete header {
+  background-color: $blue;
+  padding: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding-bottom: 2.5em;
+}
+
+article.complete:hover header {
+  background-color: $lblue;
+}
+
+article footer {
+  padding-bottom: 2px;
+  padding-top: 2px;
+  border-top-color: $dgrey;
+  border-top-width: 1px;
+  border-top-style: solid;
+  text-align: center;
+  h4 {
+    margin-top: 0.5rem;
+  }
+}
+
+h2.complete {
+  padding-top: 0.5em;
+}
+
+.item-name {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#order-status {
+  position: relative;
+}
+
+#order-details {
+  position: relative;
+  float: right;
+  text-align: right;
+}

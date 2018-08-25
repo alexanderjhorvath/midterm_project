@@ -22,9 +22,8 @@ function getOrders(user) {
     .leftJoin('line_items', 'orders.id', 'line_items.order_id')
     .leftJoin('menu_items', 'line_items.menu_item_id', 'menu_items.id')
     .then(function(rows) {
-      console.log(rows);
       return rows;
-    })
+    });
   } else {
     return knex.select(
     'orders.time',
@@ -39,7 +38,7 @@ function getOrders(user) {
     .leftJoin('menu_items', 'line_items.menu_item_id', 'menu_items.id')
     .then(function(rows) {
       return rows;
-    })
+    });
   }
 }
 
@@ -52,13 +51,11 @@ function getItems() {
     .then(function(rows) {
       console.log("Type of rows = ", typeof rows);
       return rows;
-    })
+    });
 }
 
 exports.getItems = getItems;
 
-
-const order1 = [{menu_item_id: 7, quantity: 3}, {menu_item_id: 3, quantity: 2}];
 
 function newOrder(user, timePlaced, lineItems) {
   return knex.insert({
@@ -77,15 +74,32 @@ function newOrder(user, timePlaced, lineItems) {
   });
 }
 
-newOrder(2, '2018-08-24T14:39:07.318Z', order1);
+exports.newOrder = newOrder;
+
+function updateStatus(orderId, status) {
+  return knex('orders')
+  .where({ id: orderId })
+  .update({ order_status: status })
+  .then(function(){
+    return;
+  });
+}
+
+exports.updateStatus = updateStatus;
+updateStatus(49, 'Picked up');
+
+// const order1 = [{menu_item_id: 7, quantity: 3}, {menu_item_id: 3, quantity: 2}];
+// newOrder(2, '2018-08-24T14:39:07.318Z', order1);
 
 /*
 
-menu page SELECT display all items
+- menu page SELECT display all items
  - Cart -
-menu page SELECT admin all items + UPDATE/delete
-orders user SELECT list of all orders by their id sorted into current and past
-orders admin SELECT list of all orders sorted into current and past AND UPDATE
+UPDATE menu item
+DELETE menu item
+UPDATE order status
+- orders user SELECT list of all orders by their id sorted into current and past
+- orders admin SELECT list of all orders sorted into current and past AND UPDATE
 
 Placed
 In Progress

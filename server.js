@@ -45,10 +45,8 @@ app.use("/api/users", usersRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
-  // twilioHelper.notification('Jamie', '7786971129', 'ready');
   res.clearCookie('cookieName');
   res.render("index");
-
 });
 
 // Admin route
@@ -121,7 +119,12 @@ app.get('/confirmation', (req, res) => {
 
 // POST - Create order
 app.post('/orders', (req, res) => {
- // Passes in order array
+  // Passes in order array
+  // twilio to confirm order creation - notifies owner
+  let name = req.obj.name;
+  let number = req.obj.number
+  let status = created;
+  twilioHelper.notification(name, number, status);
 })
 
 // GET - View order history
@@ -134,7 +137,14 @@ app.get('/orders', (req, res) => {
 })
 
 // PUT - Owner updates order status
-app.put('/orders/:id')
+app.put('/orders/:id', (req, res) => {
+  // twilio to confirm order status - notifies customer
+  let name = req.obj.name;
+  let number = req.obj.number
+  let status = created;
+  twilioHelper.notification(name, number, status);
+})
+
 
 
 app.listen(PORT, () => {

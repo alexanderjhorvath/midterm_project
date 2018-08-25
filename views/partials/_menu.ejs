@@ -5,18 +5,15 @@
         <% menuObj.forEach(function(item) { %>
         <% if (item.category === 'salad') { %>
         <section class="salads">
-          <article class="salads">
+          <article id="container-<%= item.id %>" class="salads">
             <header>
               <img class="item-photo" src="<%= item.image_url %>"></img>
-              <h3 class="item-name"><%= item.name %></h3>
-              <p class="item-price"><%= item.price %></p>
+              <h3 id="item-<%= item.id %>-name" class="item-name"><%= item.name %></h3>
+              <p id="item-<%= item.id %>-price" class="item-price"><%= item.price %></p>
             </header>
             <p class="item-text"><%= item.description %></p>
             <footer>
-              <form method="PUT" action="/cart">
-                <input type="hidden" name="id" value="<%= item.id %>">
-                <button type="submit" class="btn btn-info">Add to Cart</button>
-              </form>
+                <button type="submit" class="btn btn-info" id="<%= item.id %>">Add to Cart</button>
             </footer>
           </article>
         </section>
@@ -29,18 +26,15 @@
         <% menuObj.forEach(function(item) { %>
         <% if (item.category === 'sandwich') { %>
         <section class="sandwiches">
-          <article class="sandwiches">
+          <article id="container-<%= item.id %>" class="sandwiches">
             <header>
               <img class="item-photo" src="<%= item.image_url %>"></img>
-              <h3 class="item-name"><%= item.name %></h3><span class="<%= item.id %>"></span>
-              <p class="item-price"><%= item.price %></p>
+              <h3 id="item-<%= item.id %>-name" class="item-name"><%= item.name %></h3>
+              <p id="item-<%= item.id %>-price" class="item-price"><%= item.price %></p>
             </header>
             <p class="item-text"><%= item.description %></p>
             <footer>
-              <form method="PUT" action="/cart">
-                <input type="hidden" name="id" value="<%= item.id %>">
-                <button type="submit" class="btn btn-info">Add to Cart</button>
-              </form>
+                <button type="submit" class="btn btn-info" id="<%= item.id %>">Add to Cart</button>
           </footer>
           </article>
         </section>
@@ -53,18 +47,15 @@
       <% menuObj.forEach(function(item) { %>
         <% if (item.category === 'soup') { %>
       <section class="soups">
-        <article class="soups">
+        <article id="container-<%= item.id %>" class="soups">
           <header>
             <img class="item-photo" src="<%= item.image_url %>"></img>
-            <h3 class="item-name"><%= item.name %></h3>
-            <p class="item-price"><%= item.price %></p>
+            <h3 id="item-<%= item.id %>-name" class="item-name"><%= item.name %></h3>
+            <p id="item-<%= item.id %>-price" class="item-price"><%= item.price %></p>
           </header>
           <p class="item-text"><%= item.description %></p>
           <footer>
-            <form method="PUT" action="/cart">
-              <input type="hidden" name="id" value="<%= item.id %>">
-              <button type="submit" class="btn btn-info">Add to Cart</button>
-            </form>
+              <button type="submit" class="btn btn-info" id="<%= item.id %>">Add to Cart</button>
         </footer>
         </article>
       </section>

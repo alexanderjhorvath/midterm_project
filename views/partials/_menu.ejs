@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <h3>Salads</h3>
+        <% menuObj.forEach(function(item) { %>
+        <% if (item.category === 'salad') { %>
+        <section class="salads">
+          <article class="salads">
+            <header>
+              <img class="item-photo" src="<%= item.image_url %>"></img>
+              <h3 class="item-name"><%= item.name %></h3>
+              <p class="item-price"><%= item.price %></p>
+            </header>
+            <p class="item-text"><%= item.description %></p>
+            <footer>
+              <button type="button" class="btn btn-info">Add to Cart</button>
+          </footer>
+          </article>
+        </section>
+        <% } %>
+        <% }) %>
+      </div>
+
+      <div class="col-sm">
+        <h3>Sandwiches</h3>
+        <% menuObj.forEach(function(item) { %>
+        <% if (item.category === 'sandwich') { %>
+        <section class="sandwiches">
+          <article class="sandwiches">
+            <header>
+              <img class="item-photo" src="<%= item.image_url %>"></img>
+              <h3 class="item-name"><%= item.name %></h3>
+              <p class="item-price"><%= item.price %></p>
+            </header>
+            <p class="item-text"><%= item.description %></p>
+            <footer>
+              <button type="button" class="btn btn-info">Add to Cart</button>
+          </footer>
+          </article>
+        </section>
+        <% } %>
+      <% }) %>
+    </div>
+
+    <div class="col-sm">
+      <h3>Soups</h3>
+      <% menuObj.forEach(function(item) { %>
+        <% if (item.category === 'soup') { %>
+      <section class="soups">
+        <article class="soups">
+          <header>
+            <img class="item-photo" src="<%= item.image_url %>"></img>
+            <h3 class="item-name"><%= item.name %></h3>
+            <p class="item-price"><%= item.price %></p>
+          </header>
+          <p class="item-text"><%= item.description %></p>
+          <footer>
+            <button type="button" class="btn btn-info">Add to Cart</button>
+        </footer>
+        </article>
+      </section>
+      <% } %>
+      <% }) %>
+    </div>
+
+    </div>
+
+</div>

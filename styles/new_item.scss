@@ -1,6 +1,6 @@
 @import 'variables';
 
-h2 {
+h4 {
   border-bottom: 1px solid black;
   margin-left: 5px;
   margin-right: 5px;
@@ -8,7 +8,7 @@ h2 {
 }
 
 .new_item {
-  background: $lgrey;
+  background: $white;
   margin-left: 2em;
   margin-right: 2em;
   border-radius: 5px;
@@ -34,4 +34,95 @@ textarea {
 
 #zero_error {
   display: none;
+}
+
+// #new_item {
+//   display: none;
+// }
+
+article {
+  margin-top: 15px;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+}
+
+article:hover {
+  border-color: black;
+}
+
+article header {
+  background-color: $lgrey;
+  padding: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-color: darkgrey;
+}
+
+article:hover header {
+  background-color: $grey;
+}
+
+img.item-photo {
+  position: relative;
+  float: left;
+  height: 50px;
+  width: 50px;
+  top: -1px;
+  opacity: 0.75;
+  border-radius: 5px;
+}
+
+article:hover .item-photo {
+  opacity: 1;
+}
+
+.item-price {
+  position: relative;
+  float: right;
+  top: -1.75em;
+  right: -1em;
+  text-align: right;
+}
+
+.item-name {
+  position: relative;
+  color: darkgrey;
+  border-bottom-width: 0px;
+  padding-bottom: 20px;
+  padding-left: 60px;
+  margin: 0;
+}
+
+article:hover .item-name {
+  color: black;
+}
+
+article:hover .item-price {
+  color: black;
+}
+
+article footer {
+  padding-bottom: 2px;
+  padding-top: 2px;
+  border-top-color: darkgrey;
+  border-top-width: 1px;
+  border-top-style: solid;
+  text-align: center;
+}
+
+article p {
+  margin: 10px;
+}
+
+footer i {
+  position: relative;
+  float: right;
+  top: -1.5em;
+  right: 0.5em;
+  opacity: 0;
+}
+
+article:hover i {
+  opacity: 1;
 }

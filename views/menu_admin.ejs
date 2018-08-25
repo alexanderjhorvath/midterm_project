@@ -26,45 +26,14 @@
   <body class="other">
     <header>
       <% include ./partials/_header %>
+      <% include ./partials/_cart_admin %>
+      <% include ./partials/_additem %>
     </header>
 <main class="container">
-  <section class="new_item">
-    <h2>Add Menu Item</h2>
-    <form id="new_item" method="POST" action="/tweets/">
-      <form>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="cost">Cost</label>
-            <input type="number" class="form-control" id="cost" placeholder="0.00">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="price">Retail Price</label>
-            <input type="number" class="form-control" id="price" placeholder="0.00">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="name">Item name</label>
-          <input type="text" class="form-control" id="name" placeholder="Green salad">
-        </div>
-        <div class="form-group">
-          <label for="description">Description</label>
-          <input type="text" class="form-control" id="description" placeholder="Bowl of lettuce">
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="image">Image URL</label>
-            <input type="text" class="form-control" id="image">
-          </div>
-          <div class="form-group col-md-2">
-            <label for="quantity">Quantity</label>
-            <input type="number" class="form-control" id="quantity">
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Add Item</button>
-      </form>
-  </section>
-  <section id="menu_items">
-  </section>
+  <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseAddItem" aria-expanded="false" aria-controls="collapseExample">
+    Add Item
+  </button>
+      <% include ./partials/_menu %>
 </main>
   </body>
 </html>

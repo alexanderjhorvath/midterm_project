@@ -11,6 +11,7 @@ body {
   color: #244751;
   background-image: url("/images/interior3.jpg");
   background-size: cover;
+  background-attachment: fixed;
   font-family: $raleway;
   height: 100%;
   display: flex;
@@ -18,11 +19,14 @@ body {
 }
 
 main.container {
-    width: 800px;
+    width: 1000px;
     padding-top: 30px;
     background-color: $white;
     opacity: 0.9;
     margin: 0 auto;
-    height: 100%;
     border-radius: 10px;
 }
+
+// #new_item_header {
+//   cursor: pointer
+// }

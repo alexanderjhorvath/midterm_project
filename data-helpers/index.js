@@ -51,7 +51,10 @@ function getItems() {
     .then(function(rows) {
       console.log("Type of rows = ", typeof rows);
       return rows;
-    });
+    })
+    .catch((err) => {
+      console.log( err);
+      throw err; });
 }
 
 exports.getItems = getItems;

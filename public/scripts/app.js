@@ -39,16 +39,29 @@ $(document).ready(function() {
     let inventory = data.inventory;
 
     // HTML to append
-    let insert = 
+    let insert =
     `
       <article class=${category}>
-        <h2 class="item-name">${name}</h2>
+      <header>
         <img class="item-photo" src="${photo}"></img>
-        <p class="item-text">${description}</p>
+        <h3 class="item-name">${name}</h3>
         <p class="item-price">${price}</p>
+      </header>
+        <p class="item-text">${description}</p>
+      <footer>
+        <button type="button" class="btn btn-info">Add to Cart</button>
+      </footer>
       </article>
     `
       $text.html(insert);
       return $text;
   }
+
+  // Code for creating the Compose button and revealing the new tweet box
+  // $("#new_item_header").click(function() {
+  //   console.log("clicked header!");
+  //     $( "#new_item").slideToggle( "400", function() {
+  //       $( "#name").focus();
+  //     });
+  // });
 })

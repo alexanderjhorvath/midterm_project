@@ -4,21 +4,27 @@ exports.seed = function(knex, Promise) {
       return Promise.all([
         knex('users').insert({
           id: 1,
-          name: 'Alice',
+          name: 'Julia',
           email: 'alice@alice.alice',
           phone_number: 1231231234
         }),
         knex('users').insert({
           id: 2,
-          name: 'Bob',
+          name: 'Dave',
           email: 'bob@bob.bob',
           phone_number: 2342342345
         }),
         knex('users').insert({
           id: 3,
-          name: 'Charlie',
+          name: 'Kyle',
           email: 'charlie@charlie.charlie',
           phone_number: 3453453456
+        }),
+        knex('users').insert({
+          id: 4,
+          name: 'James',
+          email: 'james@james.james',
+          phone_number: 4564564567
         })
       ]);
     });

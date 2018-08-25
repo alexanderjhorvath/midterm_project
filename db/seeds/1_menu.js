@@ -61,7 +61,7 @@ exports.seed = function(knex, Promise) {
           cost: 8,
           price: 16.00,
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mollis nisi ac metus finibus, sollicitudin ullamcorper ante congue',
-          image_url: 'https://images.pexels.com/photos/5938/food-salad-healthy-lunch.jpg?auto=compress&cs=tinysrgb&h=350',
+          image_url: 'https://images.pexels.com/photos/5506/bread-food-salad-sandwich.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
           inventory: 100,
           category: 'sandwich'
         }),
@@ -71,7 +71,7 @@ exports.seed = function(knex, Promise) {
           cost: 8,
           price: 16.00,
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mollis nisi ac metus finibus, sollicitudin ullamcorper ante congue',
-          image_url: 'https://images.pexels.com/photos/5938/food-salad-healthy-lunch.jpg?auto=compress&cs=tinysrgb&h=350',
+          image_url: 'https://images.pexels.com/photos/133578/pexels-photo-133578.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
           inventory: 100,
           category: 'sandwich'
         }),
@@ -81,7 +81,7 @@ exports.seed = function(knex, Promise) {
           cost: 8,
           price: 16.00,
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mollis nisi ac metus finibus, sollicitudin ullamcorper ante congue',
-          image_url: 'https://images.pexels.com/photos/5938/food-salad-healthy-lunch.jpg?auto=compress&cs=tinysrgb&h=350',
+          image_url: 'https://images.pexels.com/photos/879201/pexels-photo-879201.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
           inventory: 100,
           category: 'sandwich'
         })

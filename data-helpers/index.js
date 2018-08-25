@@ -57,6 +57,11 @@ function getItems() {
 exports.getItems = getItems;
 
 
+// function updateInventory(soldItems) {
+//   for (var i = 0; i < soldItems.length; i++) {
+//   }
+// }
+
 function newOrder(user, timePlaced, lineItems) {
   return knex.insert({
     user_id: user,
@@ -86,7 +91,27 @@ function updateStatus(orderId, status) {
 }
 
 exports.updateStatus = updateStatus;
-updateStatus(49, 'Picked up');
+
+
+function addMenuItem(addName, addCost, addPrice, addDescription, addUrl, addInventory, addCategory) {
+  return knex.insert({
+    name: addName,
+    cost: addCost,
+    price: addPrice,
+    description: addDescription,
+    image_url: addUrl,
+    inventory: addInventory,
+    category: addCategory
+  })
+  .into('menu_items')
+  .then(function(){
+    return;
+  });
+}
+
+exports.addMenuItem = addMenuItem;
+
+console.log(addMenuItem('Turkey on Rye', 4.00, 12.00, 'Delicious ovenroasted Lilydale turkey on rye bread', 'https://images.pexels.com/photos/5506/bread-food-salad-sandwich.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260', 100, 'sandwich'));
 
 // const order1 = [{menu_item_id: 7, quantity: 3}, {menu_item_id: 3, quantity: 2}];
 // newOrder(2, '2018-08-24T14:39:07.318Z', order1);
@@ -95,15 +120,15 @@ updateStatus(49, 'Picked up');
 
 - menu page SELECT display all items
  - Cart -
-UPDATE menu item
+ - add menu item
 DELETE menu item
-UPDATE order status
+- UPDATE order status
 - orders user SELECT list of all orders by their id sorted into current and past
 - orders admin SELECT list of all orders sorted into current and past AND UPDATE
 
 Placed
 In Progress
-Ready
+Ready for pick up
 Picked up
 
 */

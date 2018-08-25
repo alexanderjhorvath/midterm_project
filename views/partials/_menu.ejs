@@ -13,7 +13,7 @@
             </header>
             <p class="item-text"><%= item.description %></p>
             <footer>
-              <form method="POST" action="/">
+              <form method="PUT" action="/cart">
                 <input type="hidden" name="id" value="<%= item.id %>">
                 <button type="submit" class="btn btn-info">Add to Cart</button>
               </form>
@@ -37,7 +37,7 @@
             </header>
             <p class="item-text"><%= item.description %></p>
             <footer>
-              <form method="POST" action="/">
+              <form method="PUT" action="/cart">
                 <input type="hidden" name="id" value="<%= item.id %>">
                 <button type="submit" class="btn btn-info">Add to Cart</button>
               </form>
@@ -61,7 +61,7 @@
           </header>
           <p class="item-text"><%= item.description %></p>
           <footer>
-            <form method="POST" action="/">
+            <form method="PUT" action="/cart">
               <input type="hidden" name="id" value="<%= item.id %>">
               <button type="submit" class="btn btn-info">Add to Cart</button>
             </form>

@@ -94,9 +94,6 @@ app.get('/menu', (req, res) => {
     });
 
   } else {
-<<<<<<< HEAD
-    res.render('menu');
-=======
       dbHelpers.getItems()
       .then(function(result) {
         result.forEach(function(item) {
@@ -105,7 +102,6 @@ app.get('/menu', (req, res) => {
         let templateVars = { menuObj : menuArray.sort(compareMenuItems) }
         res.render('menu', templateVars);
       });
->>>>>>> 2154ca6af42e5630d4a9615f6103763918ecb42d
   }
 })
 

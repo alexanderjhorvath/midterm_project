@@ -1,31 +1,8 @@
-<<<<<<< HEAD
-<!-- views/partials/_menu.ejs -->
 <div class="container">
-<div class="row">
-  <div class="col-sm">
-    <h3>Salads</h3>
-    <section class="salads">
-      <article class="salads">
-        <header>
-          <img class="item-photo" src="${photo}"></img>
-          <h3 class="item-name">Salad</h3>
-          <p class="item-price">3.99</p>
-        </header>
-        <p class="item-text">It's a salad</p>
-        <footer>
-          <button type="button" class="btn btn-info">Add to Cart</button>
-      </footer>
-      </article>
-      <section class="salads">
-        <article class="salads">
-=======
-<div class="container"></div>
-
-    <div class="row"></div>
-
+    <div class="row">
       <div class="col-sm">
         <h3>Salads</h3>
-        <% menuObj.forEach(function(item) { %>   
+        <% menuObj.forEach(function(item) { %>
         <% if (item.category === 'salad') { %>
         <section class="salads">
           <article class="salads">
@@ -46,7 +23,7 @@
 
       <div class="col-sm">
         <h3>Sandwiches</h3>
-        <% menuObj.forEach(function(item) { %>   
+        <% menuObj.forEach(function(item) { %>
         <% if (item.category === 'sandwich') { %>
         <section class="sandwiches">
           <article class="sandwiches">
@@ -67,11 +44,10 @@
 
     <div class="col-sm">
       <h3>Soups</h3>
-      <% menuObj.forEach(function(item) { %>   
+      <% menuObj.forEach(function(item) { %>
         <% if (item.category === 'soup') { %>
       <section class="soups">
         <article class="soups">
->>>>>>> 2154ca6af42e5630d4a9615f6103763918ecb42d
           <header>
             <img class="item-photo" src="<%= item.image_url %>"></img>
             <h3 class="item-name"><%= item.name %></h3>
@@ -88,8 +64,5 @@
     </div>
 
     </div>
-      
+
 </div>
-
-
-

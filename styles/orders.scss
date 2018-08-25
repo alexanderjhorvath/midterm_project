@@ -24,6 +24,19 @@ article.active:hover header {
   border-color: black;
 }
 
+article.in-progress header{
+  background-color: $yellow;
+  padding: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border: $dgrey 1px;
+}
+
+article.in-progress:hover header {
+  background-color: $lyellow;
+  border-color: black;
+}
+
 article.complete header {
   background-color: $blue;
   padding: 10px;

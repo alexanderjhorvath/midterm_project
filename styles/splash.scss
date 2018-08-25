@@ -19,10 +19,17 @@ main.splash {
     height: 100%;
 }
 
+.splash form {
+  display: inline;
+}
+
 h2.splash {
   border-bottom: 1px solid white;
   color: $white;
   text-align: center;
+  font-size: 4rem;
+  font-family: $josefin;
+  padding-top: 15px;
 }
 
 .btn btn-light {

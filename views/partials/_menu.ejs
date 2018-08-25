@@ -13,8 +13,11 @@
             </header>
             <p class="item-text"><%= item.description %></p>
             <footer>
-              <button type="button" class="btn btn-info">Add to Cart</button>
-          </footer>
+              <form method="POST" action="/">
+                <input type="hidden" name="id" value="<%= item.id %>">
+                <button type="submit" class="btn btn-info">Add to Cart</button>
+              </form>
+            </footer>
           </article>
         </section>
         <% } %>
@@ -29,12 +32,15 @@
           <article class="sandwiches">
             <header>
               <img class="item-photo" src="<%= item.image_url %>"></img>
-              <h3 class="item-name"><%= item.name %></h3>
+              <h3 class="item-name"><%= item.name %></h3><span class="<%= item.id %>"></span>
               <p class="item-price"><%= item.price %></p>
             </header>
             <p class="item-text"><%= item.description %></p>
             <footer>
-              <button type="button" class="btn btn-info">Add to Cart</button>
+              <form method="POST" action="/">
+                <input type="hidden" name="id" value="<%= item.id %>">
+                <button type="submit" class="btn btn-info">Add to Cart</button>
+              </form>
           </footer>
           </article>
         </section>
@@ -55,7 +61,10 @@
           </header>
           <p class="item-text"><%= item.description %></p>
           <footer>
-            <button type="button" class="btn btn-info">Add to Cart</button>
+            <form method="POST" action="/">
+              <input type="hidden" name="id" value="<%= item.id %>">
+              <button type="submit" class="btn btn-info">Add to Cart</button>
+            </form>
         </footer>
         </article>
       </section>

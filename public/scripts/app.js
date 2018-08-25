@@ -37,11 +37,12 @@ $(document).ready(function() {
     let description = data.description;
     let category = data.category;
     let inventory = data.inventory;
+    let id = data.id;
 
     // HTML to append
     let insert =
     `
-      <article class=${category}>
+      <article class=${category} id=${id}>
       <header>
         <img class="item-photo" src="${photo}"></img>
         <h3 class="item-name">${name}</h3>

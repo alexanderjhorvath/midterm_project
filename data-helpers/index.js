@@ -115,7 +115,6 @@ exports.addMenuItem = addMenuItem;
 //   }
 // }
 
-
 // console.log(addMenuItem('Turkey on Rye', 4.00, 12.00, 'Delicious ovenroasted Lilydale turkey on rye bread', 'https://images.pexels.com/photos/5506/bread-food-salad-sandwich.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260', 100, 'sandwich'));
 
 // const order1 = [{menu_item_id: 7, quantity: 3}, {menu_item_id: 3, quantity: 2}];

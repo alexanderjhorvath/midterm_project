@@ -60,11 +60,6 @@ function getItems() {
 exports.getItems = getItems;
 
 
-// function updateInventory(soldItems) {
-//   for (var i = 0; i < soldItems.length; i++) {
-//   }
-// }
-
 function newOrder(user, timePlaced, lineItems) {
   return knex.insert({
     user_id: user,
@@ -114,7 +109,14 @@ function addMenuItem(addName, addCost, addPrice, addDescription, addUrl, addInve
 
 exports.addMenuItem = addMenuItem;
 
-console.log(addMenuItem('Turkey on Rye', 4.00, 12.00, 'Delicious ovenroasted Lilydale turkey on rye bread', 'https://images.pexels.com/photos/5506/bread-food-salad-sandwich.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260', 100, 'sandwich'));
+
+// function updateInventory(soldItems) {
+//   for (var i = 0; i < soldItems.length; i++) {
+//   }
+// }
+
+
+// console.log(addMenuItem('Turkey on Rye', 4.00, 12.00, 'Delicious ovenroasted Lilydale turkey on rye bread', 'https://images.pexels.com/photos/5506/bread-food-salad-sandwich.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260', 100, 'sandwich'));
 
 // const order1 = [{menu_item_id: 7, quantity: 3}, {menu_item_id: 3, quantity: 2}];
 // newOrder(2, '2018-08-24T14:39:07.318Z', order1);

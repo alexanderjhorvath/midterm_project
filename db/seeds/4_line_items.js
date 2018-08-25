@@ -40,7 +40,7 @@ exports.seed = function(knex, Promise) {
           menu_item_id: 2,
           quantity: 1
         }),
-                knex('line_items').insert({
+        knex('line_items').insert({
           order_id: 3,
           menu_item_id: 5,
           quantity: 2

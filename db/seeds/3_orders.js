@@ -24,13 +24,19 @@ exports.seed = function(knex, Promise) {
           id: 4,
           user_id: 2,
           time: '2018-08-24T11:18:33.318Z',
-          order_status: 'Picked up'
+          order_status: 'Ready for pick-up'
         }),
         knex('orders').insert({
           id: 5,
           user_id: 4,
           time: '2018-08-25T17:23:07.318Z',
-          order_status: 'Ready for pick up'
+          order_status: 'In progress'
+        }),
+        knex('orders').insert({
+          id: 6,
+          user_id: 4,
+          time: '2018-08-25T18:11:23.318Z',
+          order_status: 'Placed'
         })
       ]);
     });

@@ -157,7 +157,7 @@ app.get('/confirmation', (req, res) => {
 function countArrayItems(array, item) {
   let count = 0;
   for (let i = 0; i < array.length; i++) {
-    if (array[i] === item) {
+    if (array[i].id == item) {
       count++;
     }
   }
@@ -165,19 +165,31 @@ function countArrayItems(array, item) {
 }
 // // POST - Create order
 app.post('/orders', (req, res) => {
-  // Passes in order array
-  // twilio to confirm order creation - notifies owner
+
   let user = 1;
   let timePlaced = new Date();
-  let menuArray = JSON.parse(req.body.info);
+  let array = JSON.parse(req.body.info);
   let obj = {};
-  menuArray.forEach(function(item) {  
-    obj[item.id] = countArrayItems();
+  let menuArray = [];
+
+  array.forEach(function(item) {  
+    obj[item.id] = countArrayItems(array, item.id);
+    menuArray.push(obj);
   })
-  
-  console.log(obj);
-  console.log(user, timePlaced, menuArray);
-  // dbHelpers.newOrder(user, timePlaced, menuArray)
+
+  var keyArray = Object.keys(obj);
+  let newArray = [];
+
+  for (let i = 0; i < keyArray.length; i++) {
+    let id = keyArray[i];
+    let newObj = {};
+    newObj['menu_items_id'] = id;
+    newObj['quantity'] = obj[id];
+    newArray.push(newObj);
+  }
+
+  dbHelpers.newOrder(user, timePlaced, menuArray)
+
   // let name = req.obj.name;
   // let number = req.obj.number
   // let status = created;

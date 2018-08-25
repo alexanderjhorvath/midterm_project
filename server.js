@@ -77,7 +77,6 @@ function compareMenuItems(a, b) {
   return comparison;
 }
 
-
 // GET - Menu page
 app.get('/menu', (req, res) => {
   // Renders admin or user page based on user's cookie
@@ -124,12 +123,41 @@ app.post('/orders', (req, res) => {
  // Passes in order array
 })
 
+function compareOrders(a, b) {
+  const timeA = a.time;
+  const categoryB = b.time;
+  let comparison = 0;
+  if (timeA > categoryB) {
+    comparison = 1;
+  } else if (timeA < categoryB) {
+    comparison = -1;
+  }
+  return comparison;
+}
+
 // GET - View order history
+
 app.get('/orders', (req, res) => {
+  let orderArray = [];
+
   if (req.cookies.cookieName === 'admin') {
-    res.render('orders_admin');
+    dbHelpers.getOrders('admin')
+    .then(function(result) {
+      result.forEach(function(item) {
+        orderArray.push(item);
+      })
+      let templateVars = { menuObj : orderArray.sort(compareOrders) }
+      res.render('orders_admin', templateVars);
+    });
   } else {
-    res.render('orders');
+    dbHelpers.getOrders(1)
+    .then(function(result) {
+      result.forEach(function(item) {
+        orderArray.push(item);
+      })
+      let templateVars = { menuObj : orderArray.sort(compareOrders) }
+      res.render('orders', templateVars);
+    });
   }
 })
 

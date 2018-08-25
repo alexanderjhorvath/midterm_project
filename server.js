@@ -103,6 +103,44 @@ app.get('/menu', (req, res) => {
   }
 })
 
+function compareOrders(a, b) {
+  const idA = a.id;
+  const idB = b.id;
+  let comparison = 0;
+  if (idA > idB) {
+    comparison = 1;
+  } else if (idA < idB) {
+    comparison = -1;
+  }
+  return comparison;
+}
+
+// GET - View order history
+
+app.get('/orders', (req, res) => {
+  let orderArray = [];
+
+  if (req.cookies.cookieName === 'admin') {
+    dbHelpers.getOrders('admin')
+    .then(function(result) {
+      result.forEach(function(item) {
+        orderArray.push(item);
+      })
+      let templateVars = { menuObj : orderArray.sort(compareOrders) }
+      res.render('orders_admin', templateVars);
+    });
+  } else {
+    dbHelpers.getOrders(1)
+    .then(function(result) {
+      result.forEach(function(item) {
+        orderArray.push(item);
+      })
+      let templateVars = { menuObj : orderArray.sort(compareOrders) }
+      res.render('orders', templateVars);
+    });
+  }
+})
+
 
 // Add item to cart
 app.put('/cart', (req, res) => {
@@ -116,25 +154,44 @@ app.get('/confirmation', (req, res) => {
   res.render('confirmation');
 })
 
-
-// POST - Create order
+function countArrayItems(array, item) {
+  let count = 0;
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === item) {
+      count++;
+    }
+  }
+  return count;
+}
+// // POST - Create order
 app.post('/orders', (req, res) => {
   // Passes in order array
   // twilio to confirm order creation - notifies owner
-  let name = req.obj.name;
-  let number = req.obj.number
-  let status = created;
-  twilioHelper.notification(name, number, status);
+  let user = 1;
+  let timePlaced = new Date();
+  let menuArray = JSON.parse(req.body.info);
+  let obj = {};
+  menuArray.forEach(function(item) {  
+    obj[item.id] = countArrayItems();
+  })
+  
+  console.log(obj);
+  console.log(user, timePlaced, menuArray);
+  // dbHelpers.newOrder(user, timePlaced, menuArray)
+  // let name = req.obj.name;
+  // let number = req.obj.number
+  // let status = created;
+  // twilioHelper.notification(user, number, status);
 })
 
-// GET - View order history
-app.get('/orders', (req, res) => {
-  if (req.cookies.cookieName === 'admin') {
-    res.render('orders_admin');
-  } else {
-    res.render('orders');
-  }
-})
+// // GET - View order history
+// app.get('/orders', (req, res) => {
+//   if (req.cookies.cookieName === 'admin') {
+//     res.render('orders_admin');
+//   } else {
+//     res.render('orders');
+//   }
+// })
 
 // PUT - Owner updates order status
 app.put('/orders/:id', (req, res) => {

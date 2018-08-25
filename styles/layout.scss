@@ -21,12 +21,13 @@ body {
 main.container {
     width: 1000px;
     padding-top: 30px;
+    padding-bottom: 30px;
     background-color: $white;
     opacity: 0.9;
     margin: 0 auto;
     border-radius: 10px;
 }
 
-// #new_item_header {
-//   cursor: pointer
-// }
+.collapse {
+  opacity: 0.9;
+}

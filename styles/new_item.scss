@@ -15,31 +15,6 @@ h4 {
   padding: 5px;
 }
 
-textarea {
-  padding-top: 5px;
-  padding-left: 5px;
-}
-
-.error {
-  position: relative;
-  float: right;
-  bottom: 55px;
-  width: 128px;
-  right: 64px;
-}
-
-#max_error {
-  display: none;
-}
-
-#zero_error {
-  display: none;
-}
-
-// #new_item {
-//   display: none;
-// }
-
 article {
   margin-top: 15px;
   border-style: solid;
@@ -113,16 +88,4 @@ article footer {
 
 article p {
   margin: 10px;
-}
-
-footer i {
-  position: relative;
-  float: right;
-  top: -1.5em;
-  right: 0.5em;
-  opacity: 0;
-}
-
-article:hover i {
-  opacity: 1;
 }

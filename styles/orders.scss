@@ -50,7 +50,7 @@ article.complete:hover header {
 }
 
 article footer {
-  padding-bottom: 2px;
+  padding-bottom: 10px;
   padding-top: 2px;
   border-top-color: $dgrey;
   border-top-width: 1px;
@@ -68,6 +68,12 @@ h2.complete {
 .item-name {
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+#order-button {
+  position: relative;
+  float: left;
+  margin: 0.3rem;
 }
 
 #order-status {

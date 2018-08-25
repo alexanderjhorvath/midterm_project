@@ -29,14 +29,35 @@
     <main class="container">
       <section id="active orders">
         <h2>Active Orders</h2>
-        <article class="active">
+        <article class="in-progress">
           <header class="order">
             <div id="order-details">
               <h3 class="order-id">Order Number: 34344</h3>
               <p class="order-time">Order placed: Aug 24th, 9:28PM</p>
             </div>
             <div id="order-status">
-              <h3 class="order-status">Order Status: Confirmed!</h3>
+              <h3 class="order-status">Order Status: Unconfirmed</h3>
+              <h4 class="order-ready">Awaiting Confirmation</h4>
+            </div>
+          </header>
+          <ol>
+            <li class="item-name">Green Salad</li>
+            <li class="item-name">Super Salad</li>
+            <li class="item-name">Spam Sandwich</li>
+          </ol>
+          <footer>
+            <button id="order-button" type="button" class="btn btn-primary">Confirm Order</button>
+            <h4 class="order-total">Order total: $30.99</h4>
+          </footer>
+        </article>
+        <article class="in-progress">
+          <header class="order">
+            <div id="order-details">
+              <h3 class="order-id">Order Number: 34344</h3>
+              <p class="order-time">Order placed: Aug 24th, 9:28PM</p>
+            </div>
+            <div id="order-status">
+              <h3 class="order-status">Order Status: Being Made</h3>
               <h4 class="order-ready">Ready for pickup in: 34 minutes</h4>
             </div>
           </header>
@@ -46,30 +67,32 @@
             <li class="item-name">Spam Sandwich</li>
           </ol>
           <footer>
+            <button id="order-button" type="button" class="btn btn-success">Order Ready</button>
+            <h4 class="order-total">Order total: $30.99</h4>
+          </footer>
+        </article>
+        <article class="active">
+          <header class="order">
+            <div id="order-details">
+              <h3 class="order-id">Order Number: 34344</h3>
+              <p class="order-time">Order placed: Aug 24th, 9:28PM</p>
+            </div>
+            <div id="order-status">
+              <h3 class="order-status">Order Status: Ready!</h3>
+              <h4 class="order-ready">Ready for pickup</h4>
+            </div>
+          </header>
+          <ol>
+            <li class="item-name">Green Salad</li>
+            <li class="item-name">Super Salad</li>
+            <li class="item-name">Spam Sandwich</li>
+          </ol>
+          <footer>
+            <button id="order-button" type="button" class="btn btn-info">Picked Up</button>
             <h4 class="order-total">Order total: $30.99</h4>
           </footer>
         </article>
       </section>
-      <article class="in-progress">
-        <header class="order">
-          <div id="order-details">
-            <h3 class="order-id">Order Number: 34344</h3>
-            <p class="order-time">Order placed: Aug 24th, 9:28PM</p>
-          </div>
-          <div id="order-status">
-            <h3 class="order-status">Order Status: Being Made</h3>
-            <h4 class="order-ready">Ready for pickup in: 34 minutes</h4>
-          </div>
-        </header>
-        <ol>
-          <li class="item-name">Green Salad</li>
-          <li class="item-name">Super Salad</li>
-          <li class="item-name">Spam Sandwich</li>
-        </ol>
-        <footer>
-          <h4 class="order-total">Order total: $30.99</h4>
-        </footer>
-      </article>
       <section id="completed-orders">
         <h2 class="complete">Completed Orders</h2>
         <article class="complete">

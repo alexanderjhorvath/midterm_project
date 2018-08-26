@@ -51,6 +51,29 @@
         <h4 class="order-total">Order total: $30.99</h4>
       </footer>
     </article>
+    <% orderObj.forEach(function(item) { %>
+    <% if (item.order_status === 'Placed') { %>
+    <article class=<%= item.order_status %>
+  <header class="order">
+    <div id="order-details">
+      <h3 class="order-id">Order Number: <%= item.id %></h3>
+      <p class="order-time">Order placed: <%= item.time %></p>
+    </div>
+    <div id="order-status">
+      <h3 class="order-status">Order Status: <%= item.order_status %>!</h3>
+    </div>
+  </header>
+  <ul>
+    <% orderObj.forEach(function(item) { %>
+    <li class="item-name"> <%= item.name %> <%= item.quantity %> </li>
+    <% }); %>
+  </ul>
+  <footer>
+    <h4 class="order-total">Order total: $30.99</h4>
+  </footer>
+</article>
+<% } %>
+<% }) %>
   </section>
   <section id="completed-orders">
     <h2 class="complete">Completed Orders</h2>

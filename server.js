@@ -124,14 +124,53 @@ app.post('/orders', (req, res) => {
  // Passes in order array
 })
 
+function compareOrders(a, b) {
+  const idA = a.id;
+  const idB = b.id;
+  let comparison = 0;
+  if (idA > idB) {
+    comparison = 1;
+  } else if (idA < idB) {
+    comparison = -1;
+  }
+  return comparison;
+}
+
 // GET - View order history
 app.get('/orders', (req, res) => {
+  let orderArray = [];
+  let orderDetailsArray = [];
+
   if (req.cookies.cookieName === 'admin') {
-    res.render('orders_admin');
+    dbHelpers.getOrders('admin')
+    .then(function(result) {
+      result.forEach(function(item) {
+        orderArray.push(item);
+      })
+      let templateVars = { orderObj : orderArray.sort(compareOrders) }
+      res.render('orders_admin', templateVars);
+    });
   } else {
-    res.render('orders');
-  }
-})
+    dbHelpers.getUserOrderDetails(1)
+    .then(function(result) {
+      result.forEach(function(item) {
+        orderDetailsArray.push(item);
+      })
+    })
+    dbHelpers.getOrders(1)
+    .then(function(result) {
+      result.forEach(function(item) {
+        orderArray.push(item);
+      })
+    });
+      let templateVars = {
+        orderObj : orderArray.sort(compareOrders),
+        orderDetailsObj : orderDetailsArray.sort(compareOrders)
+      };
+    console.log(templateVars);
+    res.render('orders', templateVars);
+    };
+  });
 
 // PUT - Owner updates order status
 app.put('/orders/:id')

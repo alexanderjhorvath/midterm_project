@@ -42,6 +42,19 @@ function getOrders(user) {
   }
 }
 
+function getUserOrderDetails(user) {
+  return knex.select('id', 'time', 'order_status', 'pickup_time')
+    .from('orders')
+    .where({'user_id': user})
+    .groupBy('id')
+    .then(function(rows) {
+      console.log("getUserOrderIds Object: ", rows);
+      return rows;
+    });
+}
+
+exports.getUserOrderDetails = getUserOrderDetails;
+
 exports.getOrders = getOrders;
 
 

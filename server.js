@@ -201,10 +201,9 @@ app.get('/orders', (req, res) => {
 // PUT - Owner updates order status
 app.put('/orders/:id', (req, res) => {
   // twilio to confirm order status - notifies customer
-  let name = req.obj.name;
-  let number = req.obj.number
-  let status = created;
-  twilioHelper.notification(name, number, status);
+  dbHelpers.orderStatus(ORDERID);
+  res.redirect('/orders');
+  // twilioHelper.notification('NAME', '7786971129', status);
 })
 
 app.listen(PORT, () => {

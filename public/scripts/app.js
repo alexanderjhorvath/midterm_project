@@ -83,7 +83,6 @@ $(document).ready(function() {
   })
 
   $('#form-button').on('click', function() {
-    console.log(localStorage.getItem('items'));
     var x = localStorage.getItem('items');
     $('#form-submit').val(x);
     localStorage.clear();

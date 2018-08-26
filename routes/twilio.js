@@ -11,13 +11,13 @@ function notification(name, number, stage){
     from: twilioNumber
   }
   
-  if (stage === 'placed') {
+  if (stage == 1) {
     textContent.body = `You have a new order`;
-  } else if (stage === 'confirmed') {
+  } else if (stage == 2) {
     textContent.body = `Thanks ${name}! Your order has been confirmed! We will notify you when it's ready for pickup`;
-  } else if (stage === 'ready') {
+  } else if (stage == 3) {
     textContent.body = `Your order is ready for pickup 🍔`;
-  } else if (stage === 'picked up') {
+  } else if (stage == 4) {
     textContent.body = `Thanks for shopping at Franklin's`;
   }
 

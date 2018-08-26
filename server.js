@@ -244,13 +244,28 @@ app.get('/orders', (req, res) => {
   }
 })
 
+function test() {
+  let timeNow = new Date();
+  console.log(timeNow);
+  timeNow.setMinutes(timeNow.getMinutes() + 30);
+  console.log(timeNow);
+}
+test();
+
 app.put('/orders/:id', (req, res) => {
+  // Takes order ID submitted in request to access correct order in database
   let orderId = req.body.orderId;
   
   // If time information is sent in request, update pickup time in database
   if (req.body.time) {
-    let pickupTime = req.body.time;
-    dbHelpers.updateTime(pickupTime);
+    // Converting to number
+    let readyMinutes = Number(req.body.time);
+    // Getting current time
+    let timeStamp = new Date();
+    // Adding minutes to current time to calculate pickup time
+    timeStamp.setMinutes(timeStamp.getMinutes() + readyMinutes);
+    // Updating database with 
+    dbHelpers.updateTime(timeStamp);
   }
 
   // Increments order status in database
@@ -265,3 +280,4 @@ app.put('/orders/:id', (req, res) => {
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
+

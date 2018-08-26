@@ -200,10 +200,18 @@ app.get('/orders', (req, res) => {
 
 // PUT - Owner updates order status
 app.put('/orders/:id', (req, res) => {
-  // twilio to confirm order status - notifies customer
-  dbHelpers.orderStatus(ORDERID);
-  res.redirect('/orders');
+  let orderId = req.body.id;
+  
+  // If time information is sent in request, update pickup time in database
+  if (req.body.time) {
+    let pickupTime = req.body.time;
+    dbHelpers.updateTime(pickupTime);
+  }
+
+  dbHelpers.updateStatus(orderId);
+  let status = dbHelpers.getStatus(orderId);
   // twilioHelper.notification('NAME', '7786971129', status);
+  res.redirect('/orders');
 })
 
 app.listen(PORT, () => {

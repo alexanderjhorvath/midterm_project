@@ -61,13 +61,9 @@ console.log(data);
 
   })
 
-  $('form').on('click', function() {
-    
-    // console.log(localStorage)
+  $('CHECKOUT-FORM').on('click', function() {
     console.log(localStorage.getItem('items'));
     var x = localStorage.getItem('items');
-    // console.log(JSON.parse(localStorage.getItem('items')));
-
     $('#submit-order').val(x);
   })
 

@@ -82,10 +82,10 @@ $(document).ready(function() {
 
   })
 
-  $('CHECKOUT-FORM').on('click', function() {
+  $('btn-checkout').on('click', function() {
     console.log(localStorage.getItem('items'));
     var x = localStorage.getItem('items');
-    $('#submit-order').val(x);
+    $('.btn-checkout').val('testing');
   })
 
 

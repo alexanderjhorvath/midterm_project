@@ -172,7 +172,7 @@ app.post('/orders', (req, res) => {
   let obj = {};
   let menuArray = [];
 
-  array.forEach(function(item) {  
+  array.forEach(function(item) {
     obj[item.id] = countArrayItems(array, item.id);
     menuArray.push(obj);
   })
@@ -206,7 +206,7 @@ app.get('/orders', (req, res) => {
   }
 })
 
-PUT - Owner updates order status
+// PUT - Owner updates order status
 app.put('/orders/:id', (req, res) => {
   // twilio to confirm order status - notifies customer
   let name = req.obj.name;

@@ -17,11 +17,14 @@
             <tr class="visible-xs">
             </tr>
             <tr>
-              <td><a href="#" class="btn btn-warning" data-toggle="collapse" data-target="#collapseBasket" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-angle-left"></i> Continue Shopping</a>
+              <td><a href="#" class="btn btn-warning" data-toggle="collapse" data-target="#collapseBasket" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-angle-up"></i> Continue Shopping</a>
               <span style="margin-left: 5px; margin-right: 5px;"></span><a href="#" class="btn btn-danger clearcart">Clear Cart <i class="fas fa-trash-alt"></i></a></td>
               <td colspan="2" class="hidden-xs"></td>
               <td class="hidden-xs text-center" id="orderTotalHere"><strong></strong></td>
-              <td><a href="#" class="btn btn-success btn-block">Place Order <i class="fa fa-angle-right"></i></a></td>
+              <td>
+                <form method="POST" name="info" action="/orders">
+                  <button type="submit" value="" name="info" class="btn-checkout btn btn-success btn-block">Place Order <i class="fas fa-check"></i></button></td>
+                </form>
             </tr>
           </tfoot>
         </table>

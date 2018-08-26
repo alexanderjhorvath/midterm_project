@@ -186,11 +186,10 @@ app.post('/orders', (req, res) => {
     newObj['menu_items_id'] = id;
     newObj['quantity'] = obj[id];
     newArray.push(newObj);
-
-    res.direct('/orders');
   }
 
   dbHelpers.newOrder(user, timePlaced, menuArray)
+  res.direct('/orders');
 
   // let name = req.obj.name;
   // let number = req.obj.number

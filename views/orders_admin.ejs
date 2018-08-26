@@ -9,15 +9,14 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <!-- <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script> -->
-    <!-- <script type="text/javascript" src="Scripts/bootstrap.min.js"></script> -->
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/order.js"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="/styles/new_item.css">
+    <link rel="stylesheet" href="/styles/orders.css" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans|Raleway|Roboto:100i">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
@@ -28,19 +27,94 @@
       <% include ./partials/_header %>
       <% include ./partials/_cart_admin %>
     </header>
-<main class="container">
-  <section class="new_item">
-    <h2>Compose Tweet</h2>
-    <form id="new_item" method="POST" action="/tweets/">
-      <textarea id="tweetbox" name="text" placeholder="What are you thrumming about?"></textarea><br>
-      <input name="content" type="submit">
-      <span id="zero_error" class="error">You have to write something! Please try again</span>
-      <span id="max_error" class="error">Please keep your message to at most 140 characters!</span>
-      <span class="counter">140</span>
-    </form>
-  </section>
-  <section id="old_tweets">
-  </section>
-</main>
-  </body>
-</html>
+    <main class="container">
+      <section id="active orders">
+        <h2>Active Orders</h2>
+        <article class="in-progress">
+          <header class="order">
+            <div id="order-details">
+              <h3 class="order-id">Order Number: 34344</h3>
+              <p class="order-time">Order placed: Aug 24th, 9:28PM</p>
+            </div>
+            <div id="order-status">
+              <h3 class="order-status">Order Status: Unconfirmed</h3>
+              <h4 class="order-ready">Awaiting Confirmation</h4>
+            </div>
+          </header>
+          <ol>
+            <li class="item-name">Green Salad</li>
+            <li class="item-name">Super Salad</li>
+            <li class="item-name">Spam Sandwich</li>
+          </ol>
+          <footer>
+            <button id="order-button" type="button" class="btn btn-primary">Confirm Order</button>
+            <h4 class="order-total">Order total: $30.99</h4>
+          </footer>
+        </article>
+        <article class="in-progress">
+          <header class="order">
+            <div id="order-details">
+              <h3 class="order-id">Order Number: 34344</h3>
+              <p class="order-time">Order placed: Aug 24th, 9:28PM</p>
+            </div>
+            <div id="order-status">
+              <h3 class="order-status">Order Status: Being Made</h3>
+              <h4 class="order-ready">Ready for pickup in: 34 minutes</h4>
+            </div>
+          </header>
+          <ol>
+            <li class="item-name">Green Salad</li>
+            <li class="item-name">Super Salad</li>
+            <li class="item-name">Spam Sandwich</li>
+          </ol>
+          <footer>
+            <button id="order-button" type="button" class="btn btn-success">Order Ready</button>
+            <h4 class="order-total">Order total: $30.99</h4>
+          </footer>
+        </article>
+        <article class="active">
+          <header class="order">
+            <div id="order-details">
+              <h3 class="order-id">Order Number: 34344</h3>
+              <p class="order-time">Order placed: Aug 24th, 9:28PM</p>
+            </div>
+            <div id="order-status">
+              <h3 class="order-status">Order Status: Ready!</h3>
+              <h4 class="order-ready">Ready for pickup</h4>
+            </div>
+          </header>
+          <ol>
+            <li class="item-name">Green Salad</li>
+            <li class="item-name">Super Salad</li>
+            <li class="item-name">Spam Sandwich</li>
+          </ol>
+          <footer>
+            <button id="order-button" type="button" class="btn btn-info">Picked Up</button>
+            <h4 class="order-total">Order total: $30.99</h4>
+          </footer>
+        </article>
+      </section>
+      <section id="completed-orders">
+        <h2 class="complete">Completed Orders</h2>
+        <article class="complete">
+          <header class="order">
+            <div id="order-details">
+              <h3 class="order-id">Order Number: 34344</h3>
+              <p class="order-time">Order placed: Aug 24th, 9:28PM</p>
+            </div>
+            <div id="order-status">
+              <h3 class="order-status">Order Status: Completed</h3>
+            </div>
+          </header>
+          <ol>
+            <li class="item-name">Green Salad</li>
+            <li class="item-name">Super Salad</li>
+            <li class="item-name">Spam Sandwich</li>
+          </ol>
+          <footer>
+            <h4 class="order-total">Order total: $30.99</h4>
+          </footer>
+        </article>
+    </main>
+      </body>
+    </html>

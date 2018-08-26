@@ -8,6 +8,7 @@ exports = module.exports;
 function getOrders(user) {
   if (user === 'admin') {
     return knex.select(
+    'orders.id',
     'orders.time',
     'users.name AS username',
     'users.phone_number',
@@ -26,6 +27,7 @@ function getOrders(user) {
     });
   } else {
     return knex.select(
+    'orders.id',
     'orders.time',
     'menu_items.name',
     'menu_items.price',
@@ -43,6 +45,20 @@ function getOrders(user) {
 }
 
 exports.getOrders = getOrders;
+
+function getUserOrderDetails(user) {
+  return knex.select('id', 'time', 'order_status', 'pickup_time')
+    .from('orders')
+    .where({'user_id': user})
+    .groupBy('id')
+    .then(function(rows) {
+      console.log("getUserOrderIds Object: ", rows);
+      return rows;
+    });
+}
+
+exports.getUserOrderDetails = getUserOrderDetails;
+
 
 
 function getItems() {
@@ -114,7 +130,6 @@ exports.addMenuItem = addMenuItem;
 //   for (var i = 0; i < soldItems.length; i++) {
 //   }
 // }
-
 
 // console.log(addMenuItem('Turkey on Rye', 4.00, 12.00, 'Delicious ovenroasted Lilydale turkey on rye bread', 'https://images.pexels.com/photos/5506/bread-food-salad-sandwich.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260', 100, 'sandwich'));
 

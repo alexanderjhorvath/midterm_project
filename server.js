@@ -245,15 +245,25 @@ app.get('/orders', (req, res) => {
 })
 
 app.put('/orders/:id', (req, res) => {
+  // Takes order ID submitted in request to access correct order in database
   let orderId = req.body.orderId;
   
   // If time information is sent in request, update pickup time in database
   if (req.body.time) {
-    let pickupTime = req.body.time;
-    dbHelpers.updateTime(pickupTime);
+    // Converting to number
+    let readyMinutes = Number(req.body.time);
+    // Getting current time
+    let timeStamp = new Date();
+    // Adding minutes to current time to calculate pickup time
+    timeStamp.setMinutes(timeStamp.getMinutes() + readyMinutes);
+    // Updating database with pickup time 
+    dbHelpers.updateTime(orderId, timeStamp);
   }
 
+  // Increments order status in database
   dbHelpers.updateStatus(orderId);
+
+  // Sends SMS based on status of order
   let status = dbHelpers.getStatus(orderId);
   // twilioHelper.notification('NAME', '7786971129', status);
   res.redirect('/orders');
@@ -262,3 +272,4 @@ app.put('/orders/:id', (req, res) => {
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
+

@@ -1,68 +1,105 @@
-// $(() => {
-//   $.ajax({
-//     method: "GET",
-//     url: "/api/users"
-//   }).done((users) => {
-//     for(user of users) {
-//       $("<div>").text(user.name).appendTo($("body"));
-//     }
-//   });;
-// });
 $(document).ready(function() {
-
-  // Appends menu item to container based on what category it belongs to
-  function renderMenuItems(item, category) {
-    item.forEach(function(input) {
-      let $menuItem = createMenuItems(input);
-      $(`.${category}`).append($menuItem);
-    });
+  // Keep cart items if they exist in session, else use empty array
+  let itemsArray;
+  if (localStorage.getItem('items')) {
+    itemsArray = JSON.parse(localStorage.getItem('items'));
+  } else {
+    itemsArray = [];
   }
 
-  // Loads all menu items in database, called once on page load
-  function loadAllMenuItems() {
-    $.getJSON('/menu', function(data) {
-      renderMenuItems(data);
-    });
+  localStorage.setItem('items', JSON.stringify(itemsArray));
+  const data = JSON.parse(localStorage.getItem('items'));
+
+  let orderTotal = 0;
+
+  // Render all cart items on page load
+  function renderAllCart() {
+    data.forEach(function(item) {
+      let $cartItem = createCartElement(item);
+      orderTotal += item.price;
+      console.log(orderTotal);
+      $('#order-items').append($cartItem);
+      $('#orderTotalHere').text(`Total: $${orderTotal}.00`);
+    })
+  }
+  renderAllCart();
+
+
+  // Render latest cart item
+  function renderNewCartItem(item) {
+    let $cartItem = createCartElement(item);
+    orderTotal += item.price;
+    console.log(orderTotal);
+    $('#order-items').append($cartItem);
+    $('#orderTotalHere').text(`Total: $${orderTotal}.00`);
   }
 
-  // Makes html article from data input properties
-  function createMenuItems(data) {
+  // Create html element
+  function createCartElement(data) {
+    let $text = $("<tr>").addClass("item");
 
-    let $text = $("<article>").addClass("menu-item");
-
-    // Item properties
-    let name = data.name;
-    let price = data.price
-    let photo = data.picture_url;
-    let description = data.description;
-    let category = data.category;
-    let inventory = data.inventory;
-    let id = data.id;
-
-    // HTML to append
     let insert =
-    `
-      <article class=${category} id=${id}>
-      <header>
-        <img class="item-photo" src="${photo}"></img>
-        <h3 class="item-name">${name}</h3>
-        <p class="item-price">${price}</p>
-      </header>
-        <p class="item-text">${description}</p>
-      <footer>
-        <button type="button" class="btn btn-info">Add to Cart</button>
-      </footer>
-      </article>
-    `
-      $text.html(insert);
-      return $text;
+    `<td data-th="Product">
+        <div class="row">
+          <div class="col-sm-2 hidden-xs"></div>
+          <div class="col-sm-10" style="padding-left: 50px;">
+            <h4 class="nomargin">${data.name}</h4>
+          </div>
+        </div>
+      </td>
+      <td data-th="Price">$${data.price}.00</td>
+      <td data-th="Quantity">
+        1
+      </td>
+      <td data-th="Subtotal" class="text-center">$${data.price}.00</td>
+      <td class="actions" data-th="">
+        <button class="btn btn-info btn-sm"><i class="fas fa-sync-alt"></i></button>
+        <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+      </td>`
+    $text.html(insert);
+    return $text;
   }
 
-  // Code for creating the Compose button and revealing the new tweet box
-  // $("#new_item_header").click(function() {
-  //   console.log("clicked header!");
-  //     $( "#new_item").slideToggle( "400", function() {
-  //       $( "#name").focus();
-  //     });
-  // });
+
+  // On add to cart button click, add item to local storage and call render new cart item funciton
+  $('.btn-info').on('click', function() {
+    // Grabbing ID of button clicked
+    $('#collapseBasket').collapse('show');
+    let uniqueID = this.id;
+
+    // Retreiving item information
+    const itemName = document.getElementById(`item-${uniqueID}-name`).innerText;
+    const itemPrice = parseFloat(document.getElementById(`item-${uniqueID}-price`).innerText);
+
+    // Creating object to push into cart array
+    let itemInfo = { id: uniqueID, name: itemName, price: itemPrice };
+
+    // Pushing and setting local storage
+    itemsArray.push(itemInfo);
+    localStorage.setItem('items', JSON.stringify(itemsArray));
+    const data = JSON.parse(localStorage.getItem('items'));
+    renderNewCartItem(data[data.length - 1]);
+
+  })
+
+  $('#form-button').on('click', function() {
+    console.log(localStorage.getItem('items'));
+    var x = localStorage.getItem('items');
+    $('#form-submit').val(x);
+    localStorage.clear();
+    $('#order-items').empty();
+    orderTotal = 0;
+    $('#orderTotalHere').text(`Total: $0.00`);
+  })
+
+
+  // Clears cart
+  $('.clearcart').on('click', function() {
+    localStorage.clear();
+    $('#order-items').empty();
+    orderTotal = 0;
+    $('#orderTotalHere').text(`Total: $0.00`);
+    // renderAllCart();
+  })
+
 })

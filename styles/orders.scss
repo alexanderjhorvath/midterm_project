@@ -24,6 +24,19 @@ article.active:hover header {
   border-color: black;
 }
 
+article.in-progress header{
+  background-color: $yellow;
+  padding: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border: $dgrey 1px;
+}
+
+article.in-progress:hover header {
+  background-color: $lyellow;
+  border-color: black;
+}
+
 article.complete header {
   background-color: $blue;
   padding: 10px;
@@ -37,7 +50,7 @@ article.complete:hover header {
 }
 
 article footer {
-  padding-bottom: 2px;
+  padding-bottom: 10px;
   padding-top: 2px;
   border-top-color: $dgrey;
   border-top-width: 1px;
@@ -55,6 +68,12 @@ h2.complete {
 .item-name {
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+#order-button {
+  position: relative;
+  float: left;
+  margin: 0.3rem;
 }
 
 #order-status {

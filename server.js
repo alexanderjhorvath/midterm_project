@@ -45,14 +45,16 @@ app.use("/api/users", usersRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
+  // twilioHelper.notification('Jamie', '7786971129', 'ready');
   res.clearCookie('cookieName');
   res.render("index");
+
 });
 
 // Admin route
-app.get('/orders_admin', (req, res) => {
+app.get('/menu_admin', (req, res) => {
   res.cookie('cookieName', 'admin');
-  res.redirect('/orders');
+  res.redirect('/menu');
 })
 
 // Customer route
@@ -92,101 +94,34 @@ app.get('/menu', (req, res) => {
     });
 
   } else {
-    dbHelpers.getItems()
+      dbHelpers.getItems()
       .then(function(result) {
         result.forEach(function(item) {
           menuArray.push(item);
       })
         let templateVars = { menuObj : menuArray.sort(compareMenuItems) }
         res.render('menu', templateVars);
-    });
+      });
   }
 })
 
-// HELPER FUNCTION to compare orders based on id
-function compareOrders(a, b) {
-  const idA = a.id;
-  const idB = b.id;
-  let comparison = 0;
-  if (idA > idB) {
-    comparison = 1;
-  } else if (idA < idB) {
-    comparison = -1;
-  }
-  return comparison;
-}
 
-// GET - View order history
-app.get('/orders', (req, res) => {
-  let orderArray = [];
-
-  if (req.cookies.cookieName === 'admin') {
-    dbHelpers.getOrders('admin')
-    .then(function(result) {
-      result.forEach(function(item) {
-        orderArray.push(item);
-      })
-      let templateVars = { menuObj : orderArray.sort(compareOrders) }
-      res.render('orders_admin', templateVars);
-    });
-  } else {
-    dbHelpers.getOrders(1)
-    .then(function(result) {
-      result.forEach(function(item) {
-        orderArray.push(item);
-      })
-      let templateVars = { menuObj : orderArray.sort(compareOrders) }
-      res.render('orders', templateVars);
-    });
-  }
+// Add item to cart
+app.put('/cart', (req, res) => {
 })
 
 // PUT - Update inventory
 app.put('/menu')
 
-// HELPER FUNCTION to return the count of an item in an array
-function countArrayItems(array, item) {
-  let count = 0;
-  for (let i = 0; i < array.length; i++) {
-    if (array[i].id == item) {
-      count++;
-    }
-  }
-  return count;
-}
+// GET - User reviews order before submitting
+app.get('/confirmation', (req, res) => {
+  res.render('confirmation');
+})
+
+
 // POST - Create order
 app.post('/orders', (req, res) => {
-
-  let user = 1; // Test user
-  let timePlaced = new Date(); // Timestamp of when order is placed
-  let array = JSON.parse(req.body.info);
-  let obj = {};
-  let menuArray = [];
-
-  // Looping through req.body array, and pushing objects containing id and quantity
-  array.forEach(function(item) {
-    obj[item.id] = countArrayItems(array, item.id);
-    menuArray.push(obj);
-  })
-
-  var keyArray = Object.keys(obj);
-  let newArray = [];
-
-  // Formatting array of objects to include descriptive keys
-  for (let i = 0; i < keyArray.length; i++) {
-    let id = keyArray[i];
-    let newObj = {};
-    newObj['menu_item_id'] = id;
-    newObj['quantity'] = obj[id];
-    newArray.push(newObj);
-  }
-
-  dbHelpers.newOrder(user, timePlaced, newArray);
-  res.redirect('/orders');
-
-  // Twilio messages:
-  // twilioHelper.notification('Owner', '7789772680', 'placed');
-  // twilioHelper.notification('Name', '7786971129', 'confirmed');
+ // Passes in order array
 })
 
 function compareOrders(a, b) {
@@ -202,10 +137,10 @@ function compareOrders(a, b) {
 }
 
 // GET - View order history
-
 app.get('/orders', (req, res) => {
   let orderArray = [];
   let orderDetailsArray = [];
+  let templateVars = {};
 
   if (req.cookies.cookieName === 'admin') {
     dbHelpers.getOrders('admin')
@@ -222,31 +157,25 @@ app.get('/orders', (req, res) => {
       result.forEach(function(item) {
         orderDetailsArray.push(item);
       })
+      templateVars.orderDetailsObj = orderDetailsArray.sort(compareOrders);
+      console.log(templateVars);
     })
     dbHelpers.getOrders(1)
     .then(function(result) {
-      console.log("Result = ", result);
       result.forEach(function(item) {
         orderArray.push(item);
       })
+      templateVars.orderObj = orderArray.sort(compareOrders);
+      console.log(templateVars);
+
     });
-      let templateVars = {
-        orderObj : orderArray.sort(compareOrders),
-        orderDetailsObj : orderDetailsArray.sort(compareOrders)
-      };
-    console.log(templateVars);
-    res.render('orders', templateVars);
-    };
-  });
+  res.render('orders', templateVars);
+  }
+})
 
 // PUT - Owner updates order status
-app.put('/orders/:id', (req, res) => {
-  // twilio to confirm order status - notifies customer
-  let name = req.obj.name;
-  let number = req.obj.number
-  let status = created;
-  twilioHelper.notification(name, number, status);
-})
+app.put('/orders/:id')
+
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

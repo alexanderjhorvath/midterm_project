@@ -189,7 +189,7 @@ app.post('/orders', (req, res) => {
   }
 
   dbHelpers.newOrder(user, timePlaced, menuArray)
-  res.direct('/orders');
+  res.redirect('/orders');
 
   // let name = req.obj.name;
   // let number = req.obj.number

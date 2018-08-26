@@ -154,6 +154,7 @@ app.get('/confirmation', (req, res) => {
   res.render('confirmation');
 })
 
+// HELPER FUNCTION to return the count of an item in an array
 function countArrayItems(array, item) {
   let count = 0;
   for (let i = 0; i < array.length; i++) {
@@ -169,6 +170,7 @@ app.post('/orders', (req, res) => {
   let user = 1;
   let timePlaced = new Date();
   let array = JSON.parse(req.body.info);
+  console.log(array);
   let obj = {};
   let menuArray = [];
 
@@ -192,8 +194,8 @@ app.post('/orders', (req, res) => {
   res.redirect('/orders');
 
   // Twilio messages: 
-  twilioHelper.notification('Owner', '7789772680', 'placed');
-  twilioHelper.notification('Name', '7786971129', 'confirmed');
+  // twilioHelper.notification('Owner', '7789772680', 'placed');
+  // twilioHelper.notification('Name', '7786971129', 'confirmed');
 })
 
 // GET - View order history

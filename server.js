@@ -244,14 +244,6 @@ app.get('/orders', (req, res) => {
   }
 })
 
-function test() {
-  let timeNow = new Date();
-  console.log(timeNow);
-  timeNow.setMinutes(timeNow.getMinutes() + 30);
-  console.log(timeNow);
-}
-test();
-
 app.put('/orders/:id', (req, res) => {
   // Takes order ID submitted in request to access correct order in database
   let orderId = req.body.orderId;

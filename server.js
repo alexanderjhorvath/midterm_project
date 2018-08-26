@@ -137,6 +137,7 @@ function compareOrders(a, b) {
 }
 
 // GET - View order history
+
 app.get('/orders', (req, res) => {
   let orderArray = [];
   let orderDetailsArray = [];

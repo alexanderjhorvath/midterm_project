@@ -253,7 +253,10 @@ app.put('/orders/:id', (req, res) => {
     dbHelpers.updateTime(pickupTime);
   }
 
+  // Increments order status in database
   dbHelpers.updateStatus(orderId);
+
+  // Sends SMS based on status of order
   let status = dbHelpers.getStatus(orderId);
   // twilioHelper.notification('NAME', '7786971129', status);
   res.redirect('/orders');

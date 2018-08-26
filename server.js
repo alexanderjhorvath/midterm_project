@@ -145,11 +145,6 @@ app.get('/orders', (req, res) => {
 // PUT - Update inventory
 app.put('/menu')
 
-// GET - User reviews order before submitting
-app.get('/confirmation', (req, res) => {
-  res.render('confirmation');
-})
-
 // HELPER FUNCTION to return the count of an item in an array
 function countArrayItems(array, item) {
   let count = 0;

@@ -117,7 +117,6 @@ function compareOrders(a, b) {
 }
 
 // GET - View order history
-
 app.get('/orders', (req, res) => {
   let orderArray = [];
 
@@ -155,7 +154,7 @@ function countArrayItems(array, item) {
   }
   return count;
 }
-// // POST - Create order
+// POST - Create order
 app.post('/orders', (req, res) => {
 
   let user = 1; // Test user 
@@ -207,8 +206,6 @@ app.put('/orders/:id', (req, res) => {
   let status = created;
   twilioHelper.notification(name, number, status);
 })
-
-
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

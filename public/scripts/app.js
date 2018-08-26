@@ -9,8 +9,12 @@ $(document).ready(function() {
 
   localStorage.setItem('items', JSON.stringify(itemsArray));
   const data = JSON.parse(localStorage.getItem('items'));
+<<<<<<< HEAD
 
   let $orderTotal = 0;
+=======
+console.log(data);
+>>>>>>> 63d961a5d08655b15eadb3fd75c3e73c9abda14b
 
   // Render all cart items on page load
   function renderAllCart() {
@@ -60,7 +64,11 @@ $(document).ready(function() {
 
 
   // On add to cart button click, add item to local storage and call render new cart item funciton
+<<<<<<< HEAD
   $('.btn-info').on('click', function() {
+=======
+  $('.btn').on('click', function() {
+>>>>>>> 63d961a5d08655b15eadb3fd75c3e73c9abda14b
     // Grabbing ID of button clicked
     $('#collapseBasket').collapse('show');
     let uniqueID = this.id;
@@ -76,8 +84,18 @@ $(document).ready(function() {
     itemsArray.push(itemInfo);
     localStorage.setItem('items', JSON.stringify(itemsArray));
     const data = JSON.parse(localStorage.getItem('items'));
+<<<<<<< HEAD
+=======
+    console.log(data);
+>>>>>>> 63d961a5d08655b15eadb3fd75c3e73c9abda14b
     renderNewCartItem(data[data.length - 1]);
 
+  })
+
+  $('CHECKOUT-FORM').on('click', function() {
+    console.log(localStorage.getItem('items'));
+    var x = localStorage.getItem('items');
+    $('#submit-order').val(x);
   })
 
 

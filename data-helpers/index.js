@@ -98,7 +98,7 @@ exports.newOrder = newOrder;
 function updateStatus(orderId, status) {
   return knex('orders')
   .where({ id: orderId })
-  .update({ order_status: status })
+  .update({ order_status: knex.raw('order_status + 1') })
   .then(function(){
     return;
   });

@@ -264,7 +264,7 @@ app.put('/orders/:id', (req, res) => {
     let timeStamp = new Date();
     // Adding minutes to current time to calculate pickup time
     timeStamp.setMinutes(timeStamp.getMinutes() + readyMinutes);
-    // Updating database with 
+    // Updating database with pickup time 
     dbHelpers.updateTime(timeStamp);
   }
 

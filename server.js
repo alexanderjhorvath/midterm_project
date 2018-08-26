@@ -142,16 +142,18 @@ app.get('/orders', (req, res) => {
 })
 
 // PUT - Update inventory
-app.put('/menu', (req, res) => {
+app.post('/menu', (req, res) => {
   let name = req.body.name;
-  let cost = req.body.cost;
-  let price = req.body.price;
+  let cost = Number(req.body.cost);
+  let costDecimal = Number.parseFloat(cost).toFixed(2);
+  let price = Number(req.body.price);
+  let priceDecimal = Number.parseFloat(price).toFixed(2);
   let description = req.body.description;
   let url = req.body.url;
-  let inventory = req.body.inventory;
+  let inventory = Number(req.body.quantity);
   let category = req.body.category;
-
-  addMenuItem(name, cost, price, description, url, inventory, category)
+  console.log(name, costDecimal, priceDecimal, description, url, inventory, 'salad');
+  dbHelpers.addMenuItem(name, costDecimal, priceDecimal, description, url, inventory, 'salad')
   .then(function(result) {
     res.redirect('/menu');
   })

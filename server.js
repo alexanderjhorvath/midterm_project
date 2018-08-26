@@ -191,10 +191,9 @@ app.post('/orders', (req, res) => {
   dbHelpers.newOrder(user, timePlaced, newArray)
   res.redirect('/orders');
 
-  // let name = req.obj.name;
-  // let number = req.obj.number
-  // let status = created;
-  // twilioHelper.notification(user, number, status);
+  // Twilio messages: 
+  twilioHelper.notification('Owner', '7789772680', 'placed');
+  twilioHelper.notification('Name', '7786971129', 'confirmed');
 })
 
 // GET - View order history

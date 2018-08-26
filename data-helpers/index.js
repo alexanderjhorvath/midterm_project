@@ -8,6 +8,7 @@ exports = module.exports;
 function getOrders(user) {
   if (user === 'admin') {
     return knex.select(
+    'orders.id',
     'orders.time',
     'users.name AS username',
     'users.phone_number',
@@ -26,6 +27,7 @@ function getOrders(user) {
     });
   } else {
     return knex.select(
+    'orders.id',
     'orders.time',
     'menu_items.name',
     'menu_items.price',

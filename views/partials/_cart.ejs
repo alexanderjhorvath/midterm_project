@@ -22,8 +22,9 @@
               <td colspan="2" class="hidden-xs"></td>
               <td class="hidden-xs text-center" id="orderTotalHere"><strong></strong></td>
               <td>
-                <form method="POST" name="info" action="/orders">
-                  <button type="submit" value="" name="info" class="btn-checkout btn btn-success btn-block">Place Order <i class="fas fa-check"></i></button></td>
+                <form method="POST" action="/orders">
+                  <input name="info" value="" id="form-submit" style="display: none">
+                  <button type="submit" class="btn btn-success btn-block" id="form-button">Place Order <i class="fas fa-check"></i></button></td>
                 </form>
             </tr>
           </tfoot>

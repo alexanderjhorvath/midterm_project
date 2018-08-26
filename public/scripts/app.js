@@ -82,10 +82,14 @@ $(document).ready(function() {
 
   })
 
-  $('btn-checkout').on('click', function() {
+  $('#form-button').on('click', function() {
     console.log(localStorage.getItem('items'));
     var x = localStorage.getItem('items');
-    $('.btn-checkout').val('testing');
+    $('#form-submit').val(x);
+    localStorage.clear();
+    $('#order-items').empty();
+    orderTotal = 0;
+    $('#orderTotalHere').text(`Total: $0.00`);
   })
 
 

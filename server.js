@@ -50,9 +50,9 @@ app.get("/", (req, res) => {
 });
 
 // Admin route
-app.get('/menu_admin', (req, res) => {
+app.get('/orders_admin', (req, res) => {
   res.cookie('cookieName', 'admin');
-  res.redirect('/menu');
+  res.redirect('/orders');
 })
 
 // Customer route
@@ -183,13 +183,13 @@ app.post('/orders', (req, res) => {
   for (let i = 0; i < keyArray.length; i++) {
     let id = keyArray[i];
     let newObj = {};
-    newObj['menu_items_id'] = id;
+    newObj['menu_item_id'] = id;
     newObj['quantity'] = obj[id];
     newArray.push(newObj);
   }
 
-  dbHelpers.newOrder(user, timePlaced, menuArray)
-  res.direct('/orders');
+  dbHelpers.newOrder(user, timePlaced, newArray)
+  res.redirect('/orders');
 
   // let name = req.obj.name;
   // let number = req.obj.number

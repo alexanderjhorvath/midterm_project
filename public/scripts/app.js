@@ -9,20 +9,17 @@ $(document).ready(function() {
 
   localStorage.setItem('items', JSON.stringify(itemsArray));
   const data = JSON.parse(localStorage.getItem('items'));
-<<<<<<< HEAD
 
-  let $orderTotal = 0;
-=======
-console.log(data);
->>>>>>> 63d961a5d08655b15eadb3fd75c3e73c9abda14b
+  let orderTotal = 0;
 
   // Render all cart items on page load
   function renderAllCart() {
     data.forEach(function(item) {
       let $cartItem = createCartElement(item);
-      $orderTotal += item.price;
-      console.log($orderTotal);
+      orderTotal += item.price;
+      console.log(orderTotal);
       $('#order-items').append($cartItem);
+      $('#orderTotalHere').text(`Total: $${orderTotal}.00`);
     })
   }
   renderAllCart();
@@ -31,9 +28,10 @@ console.log(data);
   // Render latest cart item
   function renderNewCartItem(item) {
     let $cartItem = createCartElement(item);
-    $orderTotal += item.price;
-    console.log($orderTotal);
+    orderTotal += item.price;
+    console.log(orderTotal);
     $('#order-items').append($cartItem);
+    $('#orderTotalHere').text(`Total: $${orderTotal}.00`);
   }
 
   // Create html element
@@ -64,11 +62,7 @@ console.log(data);
 
 
   // On add to cart button click, add item to local storage and call render new cart item funciton
-<<<<<<< HEAD
   $('.btn-info').on('click', function() {
-=======
-  $('.btn').on('click', function() {
->>>>>>> 63d961a5d08655b15eadb3fd75c3e73c9abda14b
     // Grabbing ID of button clicked
     $('#collapseBasket').collapse('show');
     let uniqueID = this.id;
@@ -84,10 +78,6 @@ console.log(data);
     itemsArray.push(itemInfo);
     localStorage.setItem('items', JSON.stringify(itemsArray));
     const data = JSON.parse(localStorage.getItem('items'));
-<<<<<<< HEAD
-=======
-    console.log(data);
->>>>>>> 63d961a5d08655b15eadb3fd75c3e73c9abda14b
     renderNewCartItem(data[data.length - 1]);
 
   })
@@ -103,7 +93,8 @@ console.log(data);
   $('.clearcart').on('click', function() {
     localStorage.clear();
     $('#order-items').empty();
-    $orderTotal = 0;
+    orderTotal = 0;
+    $('#orderTotalHere').text(`Total: $0.00`);
     // renderAllCart();
   })
 

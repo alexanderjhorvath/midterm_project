@@ -46,6 +46,19 @@ function getOrders(user) {
 
 exports.getOrders = getOrders;
 
+function getUserOrderIds(user) {
+  return knex.select('id')
+    .from('orders')
+    .where({'user_id': user})
+    .groupBy('id')
+    .then(function(rows) {
+      console.log("getUserOrderIds Object: ", rows);
+      return rows;
+    });
+}
+
+exports.getUserOrderIds = getUserOrderIds;
+
 
 function getItems() {
   return knex.select('*')

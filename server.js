@@ -152,8 +152,9 @@ app.get('/orders', (req, res) => {
       res.render('orders_admin', templateVars);
     });
   } else {
-    dbHelpers.getOrders(1)
+    dbHelpers.getOrders(2)
     .then(function(result) {
+      console.log("Result = ", result);
       result.forEach(function(item) {
         orderArray.push(item);
       })

@@ -141,7 +141,23 @@ app.get('/orders', (req, res) => {
 })
 
 // PUT - Update inventory
-app.put('/menu')
+
+app.post('/menu', (req, res) => {
+  let name = req.body.name;
+  let cost = Number(req.body.cost);
+  let costDecimal = Number.parseFloat(cost).toFixed(2);
+  let price = Number(req.body.price);
+  let priceDecimal = Number.parseFloat(price).toFixed(2);
+  let description = req.body.description;
+  let url = req.body.url;
+  let inventory = Number(req.body.quantity);
+  let category = req.body.category;
+  
+  dbHelpers.addMenuItem(name, costDecimal, priceDecimal, description, url, inventory, category)
+  .then(function(result) {
+    res.redirect('/menu');
+  })
+})
 
 // HELPER FUNCTION to return the count of an item in an array
 function countArrayItems(array, item) {
@@ -228,13 +244,19 @@ app.get('/orders', (req, res) => {
   }
 })
 
-// PUT - Owner updates order status
 app.put('/orders/:id', (req, res) => {
-  // twilio to confirm order status - notifies customer
-  let name = req.obj.name;
-  let number = req.obj.number
-  let status = created;
-  twilioHelper.notification(name, number, status);
+  let orderId = req.body.orderId;
+  
+  // If time information is sent in request, update pickup time in database
+  if (req.body.time) {
+    let pickupTime = req.body.time;
+    dbHelpers.updateTime(pickupTime);
+  }
+
+  dbHelpers.updateStatus(orderId);
+  let status = dbHelpers.getStatus(orderId);
+  // twilioHelper.notification('NAME', '7786971129', status);
+  res.redirect('/orders');
 })
 
 app.listen(PORT, () => {

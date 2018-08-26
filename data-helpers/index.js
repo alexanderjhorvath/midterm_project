@@ -95,10 +95,12 @@ function newOrder(user, timePlaced, lineItems) {
 
 exports.newOrder = newOrder;
 
-function updateStatus(orderId, status) {
+
+// Increments order status value by 1
+function updateStatus(orderId) {
   return knex('orders')
   .where({ id: orderId })
-  .update({ order_status: status })
+  .update({ order_status: knex.raw('order_status + 1') })
   .then(function(){
     return;
   });
@@ -106,6 +108,18 @@ function updateStatus(orderId, status) {
 
 exports.updateStatus = updateStatus;
 
+
+// Updates order pick up time
+function updatePickupTime(orderId, timeReady) {
+  return knex('orders')
+  .where({ id: orderId })
+  .update({ pickup_time: timeReady })
+  .then(function(){
+    return;
+  });
+}
+
+exports.updatePickupTime = updatePickupTime;
 
 function addMenuItem(addName, addCost, addPrice, addDescription, addUrl, addInventory, addCategory) {
   return knex.insert({

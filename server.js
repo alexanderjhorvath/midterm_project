@@ -92,17 +92,18 @@ app.get('/menu', (req, res) => {
     });
 
   } else {
-      dbHelpers.getItems()
+    dbHelpers.getItems()
       .then(function(result) {
         result.forEach(function(item) {
           menuArray.push(item);
       })
         let templateVars = { menuObj : menuArray.sort(compareMenuItems) }
         res.render('menu', templateVars);
-      });
+    });
   }
 })
 
+// HELPER FUNCTION to compare orders based on id
 function compareOrders(a, b) {
   const idA = a.id;
   const idB = b.id;

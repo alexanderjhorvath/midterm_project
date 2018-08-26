@@ -141,11 +141,6 @@ app.get('/orders', (req, res) => {
   }
 })
 
-
-// Add item to cart
-app.put('/cart', (req, res) => {
-})
-
 // PUT - Update inventory
 app.put('/menu')
 

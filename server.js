@@ -142,7 +142,20 @@ app.get('/orders', (req, res) => {
 })
 
 // PUT - Update inventory
-app.put('/menu')
+app.put('/menu', (req, res) => {
+  let name = req.body.name;
+  let cost = req.body.cost;
+  let price = req.body.price;
+  let description = req.body.description;
+  let url = req.body.url;
+  let inventory = req.body.inventory;
+  let category = req.body.category;
+
+  addMenuItem(name, cost, price, description, url, inventory, category)
+  .then(function(result) {
+    res.redirect('/menu');
+  })
+})
 
 // HELPER FUNCTION to return the count of an item in an array
 function countArrayItems(array, item) {

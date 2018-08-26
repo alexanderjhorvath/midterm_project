@@ -29,8 +29,7 @@
 <main class="container">
   <section id="active orders">
     <h2>Active Orders</h2>
-    <% orderDetailsObj.forEach(function(item) { %>
-      <% if (item.order_status === 4) { %>
+    <% orderDetailsObj.reverse().forEach(function(item) { %>
       <article class=<%= item.order_status %>>
     <header class="order">
       <div id="order-details">
@@ -38,20 +37,30 @@
         <p class="order-time">Order placed: <%= item.time %></p>
       </div>
       <div id="order-status">
-        <h3 class="order-status">Order Status: <%= item.order_status %>!</h3>
+        <% if (item.order_status == 1) { %>
+          <h3 class="order-status">Order Status: Placed</h3>
+        <% } else if (item.order_status == 2 ) { %>
+          <h3 class="order-status">Order Status: In progress</h3>
+        <% } else if (item.order_status == 3 ) { %>
+          <h3 class="order-status">Order Status: Ready for pickup</h3>
+        <% } else if (item.order_status == 4 ) { %>
+          <h3 class="order-status">Order Status: Picked up</h3>
+        <% } %>
       </div>
     </header>
     <ul>
+      <% orderObj.forEach(function(item2) { %>
+        <% if (item2.id === item.id) { %>
+      <li class="item-name"> <%= item2.name %> <%= item2.quantity %> <%= item2.price * item2.quantity %></li>
       <% } %>
       <% }) %>
-      <% orderObj.forEach(function(item) { %>
-      <li class="item-name"> <%= item.name %> <%= item.quantity %> </li>
-      <% }); %>
     </ul>
     <footer>
       <h4 class="order-total">Order total: $30.99</h4>
     </footer>
   </article>
+    <% }); %>
+
     <article class="active">
       <header class="order">
         <div id="order-details">

@@ -115,9 +115,10 @@ function compareOrders(a, b) {
   return comparison;
 }
 
-// GET - View order history
 app.get('/orders', (req, res) => {
   let orderArray = [];
+  let orderDetailsArray = [];
+  let templateVars = {};
 
   if (req.cookies.cookieName === 'admin') {
     dbHelpers.getOrders('admin')
@@ -125,20 +126,27 @@ app.get('/orders', (req, res) => {
       result.forEach(function(item) {
         orderArray.push(item);
       })
-      let templateVars = { menuObj : orderArray.sort(compareOrders) }
+      let templateVars = { orderObj : orderArray.sort(compareOrders) }
       res.render('orders_admin', templateVars);
     });
   } else {
-    dbHelpers.getOrders(1)
-    .then(function(result) {
-      result.forEach(function(item) {
-        orderArray.push(item);
+      return Promise.all([
+        dbHelpers.getUserOrderDetails(1),
+        dbHelpers.getOrders(1)
+      ]).then(function(result) {
+        result[0].forEach(function(item) {
+          orderDetailsArray.push(item);
+        })
+        templateVars.orderDetailsObj = orderDetailsArray.sort(compareOrders);
+        result[1].forEach(function(item) {
+          orderArray.push(item);
+        })
+        templateVars.orderObj = orderArray.sort(compareOrders);
+        console.log(templateVars);
+        res.render('orders', templateVars);
       })
-      let templateVars = { menuObj : orderArray.sort(compareOrders) }
-      res.render('orders', templateVars);
-    });
-  }
-})
+    }
+  });
 
 // PUT - Update inventory
 
@@ -196,8 +204,10 @@ app.post('/orders', (req, res) => {
     newArray.push(newObj);
   }
 
-  dbHelpers.newOrder(user, timePlaced, newArray); 
-  res.redirect('/orders');
+  dbHelpers.newOrder(user, timePlaced, newArray)
+  .then(function(result) {
+    res.redirect('/orders');    
+  }) 
 
   // Twilio messages: 
   // twilioHelper.notification('Owner', '7789772680', 'placed');
@@ -217,40 +227,6 @@ function compareOrders(a, b) {
   return comparison;
 }
 
-// GET - View order history
-app.get('/orders', (req, res) => {
-  let orderArray = [];
-  let orderDetailsArray = [];
-  let templateVars = {};
-
-  if (req.cookies.cookieName === 'admin') {
-    dbHelpers.getOrders('admin')
-    .then(function(result) {
-      result.forEach(function(item) {
-        orderArray.push(item);
-      })
-      let templateVars = { orderObj : orderArray.sort(compareOrders) }
-      res.render('orders_admin', templateVars);
-    });
-  } else {
-      return Promise.all([
-        dbHelpers.getUserOrderDetails(1),
-        dbHelpers.getOrders(1)
-      ]).then(function(result) {
-        result[0].forEach(function(item) {
-          orderDetailsArray.push(item);
-        })
-        templateVars.orderDetailsObj = orderDetailsArray.sort(compareOrders);
-        result[1].forEach(function(item) {
-
-          orderArray.push(item);
-        })
-        templateVars.orderObj = orderArray.sort(compareOrders);
-        console.log(templateVars);
-        res.render('orders', templateVars);
-      })
-    }
-  });
 
 app.put('/orders/:id', (req, res) => {
   // Takes order ID submitted in request to access correct order in database

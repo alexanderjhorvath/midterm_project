@@ -200,7 +200,7 @@ app.get('/orders', (req, res) => {
 
 // PUT - Owner updates order status
 app.put('/orders/:id', (req, res) => {
-  let orderId = req.body.id;
+  let orderId = req.body.orderId;
   
   // If time information is sent in request, update pickup time in database
   if (req.body.time) {

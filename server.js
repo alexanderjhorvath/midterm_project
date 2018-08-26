@@ -158,13 +158,13 @@ function countArrayItems(array, item) {
 // // POST - Create order
 app.post('/orders', (req, res) => {
 
-  let user = 1;
-  let timePlaced = new Date();
+  let user = 1; // Test user 
+  let timePlaced = new Date(); // Timestamp of when order is placed
   let array = JSON.parse(req.body.info);
-  console.log(array);
   let obj = {};
   let menuArray = [];
 
+  // Looping through req.body array, and pushing objects containing id and quantity
   array.forEach(function(item) {
     obj[item.id] = countArrayItems(array, item.id);
     menuArray.push(obj);
@@ -173,6 +173,7 @@ app.post('/orders', (req, res) => {
   var keyArray = Object.keys(obj);
   let newArray = [];
 
+  // Formatting array of objects to include descriptive keys 
   for (let i = 0; i < keyArray.length; i++) {
     let id = keyArray[i];
     let newObj = {};
@@ -181,7 +182,7 @@ app.post('/orders', (req, res) => {
     newArray.push(newObj);
   }
 
-  dbHelpers.newOrder(user, timePlaced, newArray)
+  dbHelpers.newOrder(user, timePlaced, newArray); 
   res.redirect('/orders');
 
   // Twilio messages: 

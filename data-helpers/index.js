@@ -80,7 +80,7 @@ function newOrder(user, timePlaced, lineItems) {
   return knex.insert({
     user_id: user,
     time: timePlaced,
-    order_status: "Placed"
+    order_status: 1
   })
   .returning('id')
   .into('orders')

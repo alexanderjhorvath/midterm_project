@@ -152,24 +152,39 @@ app.get('/orders', (req, res) => {
       res.render('orders_admin', templateVars);
     });
   } else {
-    dbHelpers.getUserOrderDetails(1)
-    .then(function(result) {
-      result.forEach(function(item) {
-        orderDetailsArray.push(item);
+      return Promise.all([
+        dbHelpers.getUserOrderDetails(1),
+        dbHelpers.getOrders(1)
+      ]).then(function(result) {
+        result[0].forEach(function(item) {
+          orderDetailsArray.push(item);
+        })
+        templateVars.orderDetailsObj = orderDetailsArray.sort(compareOrders);
+        result[1].forEach(function(item) {
+          orderArray.push(item);
+        })
+        templateVars.orderObj = orderArray.sort(compareOrders);
+        console.log(templateVars);
+        res.render('orders', templateVars);
       })
-      templateVars.orderDetailsObj = orderDetailsArray.sort(compareOrders);
-      console.log(templateVars);
-    })
-    dbHelpers.getOrders(1)
-    .then(function(result) {
-      result.forEach(function(item) {
-        orderArray.push(item);
-      })
-      templateVars.orderObj = orderArray.sort(compareOrders);
-      console.log(templateVars);
-
-    });
-  res.render('orders', templateVars);
+  //   dbHelpers.getUserOrderDetails(1)
+  //   .then(function(result) {
+  //     result.forEach(function(item) {
+  //       orderDetailsArray.push(item);
+  //     })
+  //     templateVars.orderDetailsObj = orderDetailsArray.sort(compareOrders);
+  //     console.log(templateVars);
+  //   })
+  //   dbHelpers.getOrders(1)
+  //   .then(function(result) {
+  //     result.forEach(function(item) {
+  //       orderArray.push(item);
+  //     })
+  //     templateVars.orderObj = orderArray.sort(compareOrders);
+  //     console.log(templateVars);
+  //
+  //   });
+  // res.render('orders', templateVars);
   }
 })
 

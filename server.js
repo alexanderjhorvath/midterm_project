@@ -186,8 +186,7 @@ function countArrayItems(array, item) {
 // POST - Create order
 app.post('/orders', (req, res) => {
   // Twilio messages:
-  // twilioHelper.notification('Owner', '7789772680', 'placed');
-  // twilioHelper.notification('Name', '7786971129', 'confirmed');
+  twilioHelper.noTimeNotification('Owner', '7789772680', 1);
 
   let user = 1; // Test user
   let timePlaced = new Date(); // Timestamp of when order is placed
@@ -251,8 +250,7 @@ app.post('/orders/status', (req, res) => {
       dbHelpers.getStatus(orderId)
     ])
     .then(function(result) {
-      console.log('made it ');
-      twilioHelper.notification('NAME', '7786971129', result[2].order_status, readyMinutes);
+      twilioHelper.notification('Jamie', '7786971129', result[2][0].order_status, readyMinutes);
       res.redirect('/orders');
     })
   } else { // if no time information is sent in request:
@@ -260,7 +258,7 @@ app.post('/orders/status', (req, res) => {
       dbHelpers.updateStatus(orderId),
       dbHelpers.getStatus(orderId)
   ]).then(function(result) {
-      twilioHelper.notification('NAME', '7786971129', result[1].order_status, 0);
+      twilioHelper.noTimeNotification('Jamie', '7786971129', result[1][0].order_status);
       res.redirect('/orders');
     })
   }

@@ -11,14 +11,25 @@ function notification(name, number, stage, time){
     from: twilioNumber
   }
   
+  textContent.body = `Thanks ${name}! Your order will be ready in ${time} minutes`;
+  
+  client.messages.create(textContent)
+    .then((message) => console.log(message.to))
+}
+
+function noTimeNotification(name, number, stage){
+
+  const textContent = {
+    to: number,
+    from: twilioNumber
+  }
+
   if (stage == 1) {
     textContent.body = `You have a new order`;
-  } else if (stage == 2) {
-    textContent.body = `Thanks ${name}! Your order will be ready in ${time} minutes`;
-  } else if (stage == 3) {
-    textContent.body = `Your order is ready for pickup 🍔`;
-  } else if (stage == 4) {
-    textContent.body = `Thanks for shopping at Franklin's`;
+  } else if (stage > 1 && stage < 3) {
+    textContent.body = `Hi ${name}, your order is ready for pickup 🍔`;
+  } else if (stage >= 3) {
+    textContent.body = `Thanks for shopping at Franklins`;    
   }
 
   client.messages.create(textContent)
@@ -26,3 +37,4 @@ function notification(name, number, stage, time){
 }
 
 exports.notification = notification;
+exports.noTimeNotification = noTimeNotification;

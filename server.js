@@ -231,7 +231,6 @@ function compareOrders(a, b) {
 app.put('/orders/:id', (req, res) => {
   // Takes order ID submitted in request to access correct order in database
   let orderId = req.body.orderId;
-  
   // If time information is sent in request, update pickup time in database
   if (req.body.time) {
     // Converting to number
@@ -241,17 +240,29 @@ app.put('/orders/:id', (req, res) => {
     // Adding minutes to current time to calculate pickup time
     timeStamp.setMinutes(timeStamp.getMinutes() + readyMinutes);
     // Updating database with pickup time 
-    dbHelpers.updateTime(orderId, timeStamp);
+    return Promise.all([
+      dbHelpers.updateStatus(orderId),
+      dbHelpers.updateTime(orderId, timeStamp),
+      dbHelpers.getStatus(orderId)
+    ])
+    .then(function(result) {
+      if (result[2] == 2) {
+        twilioHelper.notification('NAME', '7786971129', status);
+      }
+      res.redirect('/orders');
+    })
+  } else {
+    return Promise.all([
+      dbHelpers.updateStatus(orderId),
+      dbHelpers.getStatus(orderId)
+  ]).then(function(result) {
+    if (result[1] == 2) {
+      twilioHelper.notification('NAME', '7786971129', status);
+    }
+    res.redirect('/orders');
+    })
   }
-
-  // Increments order status in database
-  dbHelpers.updateStatus(orderId);
-
-  // Sends SMS based on status of order
-  let status = dbHelpers.getStatus(orderId);
-  // twilioHelper.notification('NAME', '7786971129', status);
-  res.redirect('/orders');
-})
+});
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

@@ -186,7 +186,7 @@ function countArrayItems(array, item) {
 // POST - Create order
 app.post('/orders', (req, res) => {
   // Twilio messages:
-  twilioHelper.noTimeNotification('Owner', '7789772680', 1);
+  // twilioHelper.noTimeNotification('Owner', '7789772680', 1);
 
   let user = 1; // Test user
   let timePlaced = new Date(); // Timestamp of when order is placed

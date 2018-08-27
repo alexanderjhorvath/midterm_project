@@ -25,11 +25,11 @@ function noTimeNotification(name, number, stage){
   }
 
   if (stage == 1) {
-    textContent.body = `You have a new order`;
+    textContent.body = `You have a new order!`;
   } else if (stage > 1 && stage < 3) {
     textContent.body = `Hi ${name}, your order is ready for pickup 🍔`;
   } else if (stage >= 3) {
-    textContent.body = `Thanks for shopping at Franklins`;    
+    textContent.body = `Thanks for shopping at Franklin's 🐾`;    
   }
 
   client.messages.create(textContent)

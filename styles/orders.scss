@@ -25,7 +25,7 @@ article.active:hover header {
 }
 
 article.in-progress header{
-  background-color: $yellow;
+  background-color: $dgrey;
   padding: 10px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -33,7 +33,7 @@ article.in-progress header{
 }
 
 article.in-progress:hover header {
-  background-color: $lyellow;
+  background-color: $lgrey;
   border-color: black;
 }
 
@@ -59,10 +59,11 @@ article footer {
   h4 {
     margin-top: 0.5rem;
   }
-}
-
-h2.complete {
-  padding-top: 0.5em;
+  p {
+    text-align: right;
+    margin-bottom: 0;
+    margin-right: 1em;
+  }
 }
 
 .item-name {
@@ -70,10 +71,17 @@ h2.complete {
   margin-bottom: 5px;
 }
 
+#time {
+  margin: 0.3rem;
+  margin-right: 1em;
+  width: 15%;
+  float: right;
+}
+
 #order-button {
   position: relative;
   float: left;
-  margin: 0.3rem;
+  margin: 0.5rem;
 }
 
 #order-status {

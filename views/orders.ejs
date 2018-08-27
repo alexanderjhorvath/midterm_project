@@ -28,12 +28,13 @@
     </header>
 <main class="container">
   <section id="active orders">
+    <h2>Orders</h2>
     <% orderDetailsObj.reverse().forEach(function(item) { %>
-      <% if (item.order_status == 1) { %>
+      <% if (item.order_status == 3) { %>
         <article class="active">
-      <% } else if (item.order_status == 2 || item.order_status ==3 ) { %>
+      <% } else if (item.order_status == 1 || item.order_status == 2) { %>
         <article class="in-progress">
-      <% } else if (item.order_status == 4 ) { %>
+      <% } else if (item.order_status == 4) { %>
         <article class="complete">
       <% } %>
     <header class="order">

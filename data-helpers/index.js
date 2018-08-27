@@ -32,7 +32,8 @@ function getOrders(user) {
     'menu_items.name',
     'menu_items.price',
     'line_items.quantity',
-    'orders.order_status'
+    'orders.order_status',
+    'orders.pickup_time'
     )
     .from('orders')
     .where({'user_id': user})
@@ -103,6 +104,19 @@ function newOrder(user, timePlaced, lineItems) {
 exports.newOrder = newOrder;
 
 
+//Retrieves order status
+function getStatus(orderId) {
+  return knex.select('order_status')
+  .from('orders')
+  .where({ id: orderId })
+  .then(function(rows) {
+    return rows;
+  });
+}
+
+exports.getStatus = getStatus;
+
+
 // Increments order status value by 1
 function updateStatus(orderId) {
   return knex('orders')
@@ -114,6 +128,19 @@ function updateStatus(orderId) {
 }
 
 exports.updateStatus = updateStatus;
+
+
+//Retrieves pick-up time
+function getPickupTime(orderId) {
+  return knex.select('pickup_time')
+  .from('orders')
+  .where({ id: orderId })
+  .then(function(rows) {
+    return rows;
+  });
+}
+
+exports.getPickupTime = getPickupTime;
 
 
 // Updates order pick up time

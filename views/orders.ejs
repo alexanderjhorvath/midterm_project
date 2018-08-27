@@ -28,7 +28,6 @@
     </header>
 <main class="container">
   <section id="active orders">
-    <h2>Active Orders</h2>
     <% orderDetailsObj.reverse().forEach(function(item) { %>
       <% if (item.order_status == 1) { %>
         <article class="active">
@@ -69,27 +68,6 @@
   </article>
     <% }); %>
   </section>
-  <section id="completed-orders">
-    <h2 class="complete">Completed Orders</h2>
-    <article class="complete">
-      <header class="order">
-        <div id="order-details">
-          <h3 class="order-id">Order Number: 34344</h3>
-          <p class="order-time">Order placed: Aug 24th, 9:28PM</p>
-        </div>
-        <div id="order-status">
-          <h3 class="order-status">Order Status: Completed</h3>
-        </div>
-      </header>
-      <ol>
-        <li class="item-name">Green Salad</li>
-        <li class="item-name">Super Salad</li>
-        <li class="item-name">Spam Sandwich</li>
-      </ol>
-      <footer>
-        <h4 class="order-total">Order total: $30.99</h4>
-      </footer>
-    </article>
 </main>
   </body>
 </html>

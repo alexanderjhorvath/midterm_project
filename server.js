@@ -152,7 +152,7 @@ app.post('/menu', (req, res) => {
   let url = req.body.url;
   let inventory = Number(req.body.quantity);
   let category = req.body.category;
-  
+
   dbHelpers.addMenuItem(name, costDecimal, priceDecimal, description, url, inventory, category)
   .then(function(result) {
     res.redirect('/menu');
@@ -172,7 +172,7 @@ function countArrayItems(array, item) {
 // POST - Create order
 app.post('/orders', (req, res) => {
 
-  let user = 1; // Test user 
+  let user = 1; // Test user
   let timePlaced = new Date(); // Timestamp of when order is placed
   let array = JSON.parse(req.body.info);
   let obj = {};
@@ -187,7 +187,7 @@ app.post('/orders', (req, res) => {
   var keyArray = Object.keys(obj);
   let newArray = [];
 
-  // Formatting array of objects to include descriptive keys 
+  // Formatting array of objects to include descriptive keys
   for (let i = 0; i < keyArray.length; i++) {
     let id = keyArray[i];
     let newObj = {};
@@ -196,10 +196,10 @@ app.post('/orders', (req, res) => {
     newArray.push(newObj);
   }
 
-  dbHelpers.newOrder(user, timePlaced, newArray); 
+  dbHelpers.newOrder(user, timePlaced, newArray);
   res.redirect('/orders');
 
-  // Twilio messages: 
+  // Twilio messages:
   // twilioHelper.notification('Owner', '7789772680', 'placed');
   // twilioHelper.notification('Name', '7786971129', 'confirmed');
 })
@@ -224,38 +224,44 @@ app.get('/orders', (req, res) => {
   let templateVars = {};
 
   if (req.cookies.cookieName === 'admin') {
-    dbHelpers.getOrders('admin')
-    .then(function(result) {
-      result.forEach(function(item) {
+    return Promise.all([
+      dbHelpers.getOrderDetails(req.cookies.cookieName),
+      dbHelpers.getOrders(req.cookies.cookieName)
+    ]).then(function(result) {
+      result[0].forEach(function(item) {
+        orderDetailsArray.push(item);
+      })
+      templateVars.orderDetailsObj = orderDetailsArray.sort(compareOrders);
+      result[1].forEach(function(item) {
         orderArray.push(item);
       })
-      let templateVars = { orderObj : orderArray.sort(compareOrders) }
-      res.render('orders_admin', templateVars);
-    });
+      templateVars.orderObj = orderArray.sort(compareOrders);
+      console.log(templateVars);
+      res.render('orders', templateVars);
+    })
   } else {
-      return Promise.all([
-        dbHelpers.getUserOrderDetails(1),
-        dbHelpers.getOrders(1)
-      ]).then(function(result) {
-        result[0].forEach(function(item) {
-          orderDetailsArray.push(item);
-        })
-        templateVars.orderDetailsObj = orderDetailsArray.sort(compareOrders);
-        result[1].forEach(function(item) {
-
-          orderArray.push(item);
-        })
-        templateVars.orderObj = orderArray.sort(compareOrders);
-        console.log(templateVars);
-        res.render('orders', templateVars);
+    return Promise.all([
+      dbHelpers.getOrderDetails(1),
+      dbHelpers.getOrders(1)
+    ]).then(function(result) {
+      result[0].forEach(function(item) {
+        orderDetailsArray.push(item);
       })
-    }
-  });
+      templateVars.orderDetailsObj = orderDetailsArray.sort(compareOrders);
+      result[1].forEach(function(item) {
+        orderArray.push(item);
+      })
+      templateVars.orderObj = orderArray.sort(compareOrders);
+      console.log(templateVars);
+      res.render('orders', templateVars);
+    })
+  }
+});
 
 app.put('/orders/:id', (req, res) => {
   // Takes order ID submitted in request to access correct order in database
   let orderId = req.body.orderId;
-  
+
   // If time information is sent in request, update pickup time in database
   if (req.body.time) {
     // Converting to number
@@ -264,7 +270,7 @@ app.put('/orders/:id', (req, res) => {
     let timeStamp = new Date();
     // Adding minutes to current time to calculate pickup time
     timeStamp.setMinutes(timeStamp.getMinutes() + readyMinutes);
-    // Updating database with pickup time 
+    // Updating database with pickup time
     dbHelpers.updateTime(orderId, timeStamp);
   }
 

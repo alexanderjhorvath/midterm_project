@@ -46,18 +46,26 @@ function getOrders(user) {
 
 exports.getOrders = getOrders;
 
-function getUserOrderDetails(user) {
-  return knex.select('id', 'time', 'order_status', 'pickup_time')
-    .from('orders')
-    .where({'user_id': user})
-    .groupBy('id')
-    .then(function(rows) {
-      console.log("getUserOrderIds Object: ", rows);
-      return rows;
-    });
+function getOrderDetails(user) {
+  if (user === 'admin') {
+    return knex.select('id', 'time', 'order_status', 'pickup_time')
+      .from('orders')
+      .groupBy('id')
+      .then(function(rows) {
+        return rows;
+      });
+  } else {
+    return knex.select('id', 'time', 'order_status', 'pickup_time')
+      .from('orders')
+      .where({'user_id': user})
+      .groupBy('id')
+      .then(function(rows) {
+        return rows;
+      });
+  }
 }
 
-exports.getUserOrderDetails = getUserOrderDetails;
+exports.getOrderDetails = getOrderDetails;
 
 
 

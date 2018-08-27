@@ -10,9 +10,7 @@ module.exports = (knex) => {
       .select("*")
       .from("users")
       .then((results) => {
-        // console.log('1', res.json(results));
         console.log('2', results)
-        // console.log('3', res.json)
     });
   });
 

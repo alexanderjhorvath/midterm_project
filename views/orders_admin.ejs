@@ -41,6 +41,14 @@
           <% }) %>
         </ul>
         <footer>
+          <% if (item.order_status == 1) { %>
+            <button id="order-button" type="button" class="btn btn-primary">Confirm Order</button>
+          <% } else if (item.order_status == 2 ) { %>
+            <button id="order-button" type="button" class="btn btn-success">Order Ready</button>
+          <% } else if (item.order_status == 3 ) { %>
+            <button id="order-button" type="button" class="btn btn-info">Picked Up</button>
+          <% } else if (item.order_status == 4 ) { %>
+          <% } %>
           <h4 class="order-total">Order total: $<%= array.reduce((a, b) => a + b) %>.00</h4>
         </footer>
       </article>

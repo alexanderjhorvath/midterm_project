@@ -30,7 +30,13 @@
   <section id="active orders">
     <h2>Active Orders</h2>
     <% orderDetailsObj.reverse().forEach(function(item) { %>
-      <article class=<%= item.order_status %>>
+      <% if (item.order_status == 1) { %>
+        <article class="active">
+      <% } else if (item.order_status == 2 || item.order_status ==3 ) { %>
+        <article class="in-progress">
+      <% } else if (item.order_status == 4 ) { %>
+        <article class="complete">
+      <% } %>
     <header class="order">
       <div id="order-details">
         <h3 class="order-id">Order Number: <%= item.id %></h3>

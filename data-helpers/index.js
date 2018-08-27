@@ -73,7 +73,6 @@ function getItems() {
   return knex.select('*')
     .from('menu_items')
     .then(function(rows) {
-      console.log("Type of rows = ", typeof rows);
       return rows;
     })
     .catch((err) => {

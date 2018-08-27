@@ -134,7 +134,6 @@ app.get('/orders', (req, res) => {
         orderArray.push(item);
       })
       templateVars.orderObj = orderArray.sort(compareOrders);
-      console.log(templateVars);
       res.render('orders', templateVars);
     })
   } else {
@@ -150,7 +149,6 @@ app.get('/orders', (req, res) => {
         orderArray.push(item);
       })
       templateVars.orderObj = orderArray.sort(compareOrders);
-      console.log(templateVars);
       res.render('orders', templateVars);
     })
   }

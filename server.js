@@ -228,7 +228,7 @@ function compareOrders(a, b) {
 }
 
 
-app.put('/orders/:id', (req, res) => {
+app.put('/orders/status', (req, res) => {
   // Takes order ID submitted in request to access correct order in database
   let orderId = req.body.orderId;
   // If time information is sent in request, update pickup time in database
@@ -247,7 +247,7 @@ app.put('/orders/:id', (req, res) => {
     ])
     .then(function(result) {
       if (result[2] == 2) {
-        twilioHelper.notification('NAME', '7786971129', status);
+        twilioHelper.notification('NAME', '7786971129', status, readyMinutes);
       }
       res.redirect('/orders');
     })

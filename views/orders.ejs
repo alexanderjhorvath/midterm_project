@@ -47,12 +47,12 @@
           <h3 class="order-status">Order Status: Placed</h3>
         <% } else if (item.order_status == 2 ) { %>
           <h3 class="order-status">Order Status: In progress</h3>
+          <h4 class="order-ready"> ETA: <%= item.pickup_time.toLocaleDateString('en-US', { timeZone: 'America/Vancouver', hour: '2-digit', minute: '2-digit'}) %>
         <% } else if (item.order_status == 3 ) { %>
           <h3 class="order-status">Order Status: Ready for pickup</h3>
         <% } else if (item.order_status == 4 ) { %>
           <h3 class="order-status">Order Status: Picked up</h3>
         <% } %>
-        <h4 class="order-ready">ETA </h4>
       </div>
     </header>
     <ul>

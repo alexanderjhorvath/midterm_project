@@ -1,9 +1,5 @@
 $(document).ready(function() {
 
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-  })
-
   // Keep cart items if they exist in session, else use empty array
   let itemsArray;
   if (localStorage.getItem('items')) {
@@ -58,8 +54,6 @@ $(document).ready(function() {
       </td>
       <td data-th="Subtotal" class="text-center">$${data.price}.00</td>
       <td class="actions" data-th="">
-        <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Update item coming soon"><i class="fas fa-sync-alt"></i></button>
-        <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete item coming soon"><i class="fas fa-trash-alt" ></i></button>
       </td>`
     $text.html(insert);
     return $text;

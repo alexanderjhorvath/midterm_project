@@ -21,6 +21,7 @@ body {
 h2 {
   font-family: $josefin;
   font-size: 4em;
+  text-align: center;
 }
 
 main.container {
@@ -30,6 +31,7 @@ main.container {
     background-color: $white;
     opacity: 0.9;
     margin: 0 auto;
+    margin-top: 1em;
     border-radius: 10px;
 }
 

@@ -64,6 +64,16 @@ exports.seed = function(knex, Promise) {
           order_id: 5,
           menu_item_id: 2,
           quantity: 1
+        }),
+        knex('line_items').insert({
+          order_id: 6,
+          menu_item_id: 1,
+          quantity: 1
+        }),
+        knex('line_items').insert({
+          order_id: 6,
+          menu_item_id: 4,
+          quantity: 1
         })
       ]);
     });

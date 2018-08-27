@@ -185,6 +185,9 @@ function countArrayItems(array, item) {
 }
 // POST - Create order
 app.post('/orders', (req, res) => {
+  // Twilio messages:
+  // twilioHelper.notification('Owner', '7789772680', 'placed');
+  // twilioHelper.notification('Name', '7786971129', 'confirmed');
 
   let user = 1; // Test user
   let timePlaced = new Date(); // Timestamp of when order is placed
@@ -214,10 +217,6 @@ app.post('/orders', (req, res) => {
   .then(function(result) {
     res.redirect('/orders');
   })
-
-  // Twilio messages:
-  // twilioHelper.notification('Owner', '7789772680', 'placed');
-  // twilioHelper.notification('Name', '7786971129', 'confirmed');
 })
 
 
@@ -234,10 +233,9 @@ function compareOrders(a, b) {
 }
 
 
-app.put('/orders/:id', (req, res) => {
+app.put('/orders/status', (req, res) => {
   // Takes order ID submitted in request to access correct order in database
   let orderId = req.body.orderId;
-
   // If time information is sent in request, update pickup time in database
   if (req.body.time) {
     // Converting to number
@@ -246,20 +244,31 @@ app.put('/orders/:id', (req, res) => {
     let timeStamp = new Date();
     // Adding minutes to current time to calculate pickup time
     timeStamp.setMinutes(timeStamp.getMinutes() + readyMinutes);
-    // Updating database with pickup time
-    dbHelpers.updateTime(orderId, timeStamp);
+
+    return Promise.all([
+      dbHelpers.updateStatus(orderId),
+      dbHelpers.updateTime(orderId, timeStamp),
+      dbHelpers.getStatus(orderId)
+    ])
+    .then(function(result) {
+      if (result[2] == 2) { // if order status is 'confirmed', text customer
+        twilioHelper.notification('NAME', '7786971129', status, readyMinutes);
+      }
+      res.redirect('/orders');
+    })
+  } else { // if no time information is sent in request:
+    return Promise.all([
+      dbHelpers.updateStatus(orderId),
+      dbHelpers.getStatus(orderId)
+  ]).then(function(result) {
+    if (result[1] == 2) {
+      twilioHelper.notification('NAME', '7786971129', status);
+    }
+    res.redirect('/orders');
+    })
   }
-
-  // Increments order status in database
-  dbHelpers.updateStatus(orderId);
-
-  // Sends SMS based on status of order
-  let status = dbHelpers.getStatus(orderId);
-  // twilioHelper.notification('NAME', '7786971129', status);
-  res.redirect('/orders');
-})
+});
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
-

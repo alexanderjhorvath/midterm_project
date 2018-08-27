@@ -34,7 +34,7 @@
     <header class="order">
       <div id="order-details">
         <h3 class="order-id">Order Number: <%= item.id %></h3>
-        <p class="order-time">Order placed: <%= item.time %></p>
+        <p class="order-time">Order placed: <%= item.time.toLocaleDateString('en-US', { timeZone: 'America/Vancouver', month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'}) %></p>
       </div>
       <div id="order-status">
         <% if (item.order_status == 1) { %>
@@ -46,6 +46,7 @@
         <% } else if (item.order_status == 4 ) { %>
           <h3 class="order-status">Order Status: Picked up</h3>
         <% } %>
+        <h4 class="order-ready">ETA </h4>
       </div>
     </header>
     <ul>
@@ -57,51 +58,10 @@
       <% }) %>
     </ul>
     <footer>
-      <h4 class="order-total">Order total: $<%= array.reduce((a, b) => a + b) %></h4>
+      <h4 class="order-total">Order total: $<%= array.reduce((a, b) => a + b) %>.00</h4>
     </footer>
   </article>
     <% }); %>
-
-    <article class="active">
-      <header class="order">
-        <div id="order-details">
-          <h3 class="order-id">Order Number: 34344</h3>
-          <p class="order-time">Order placed: Aug 24th, 9:28PM</p>
-        </div>
-        <div id="order-status">
-          <h3 class="order-status">Order Status: Confirmed!</h3>
-          <h4 class="order-ready">Ready for pickup!</h4>
-        </div>
-      </header>
-      <ol>
-        <li class="item-name">Green Salad</li>
-        <li class="item-name">Super Salad</li>
-        <li class="item-name">Spam Sandwich</li>
-      </ol>
-      <footer>
-        <h4 class="order-total">Order total: $30.99</h4>
-      </footer>
-    </article>
-    <article class="in-progress">
-      <header class="order">
-        <div id="order-details">
-          <h3 class="order-id">Order Number: 34344</h3>
-          <p class="order-time">Order placed: Aug 24th, 9:28PM</p>
-        </div>
-        <div id="order-status">
-          <h3 class="order-status">Order Status: Being Made</h3>
-          <h4 class="order-ready">Ready for pickup in: 34 minutes</h4>
-        </div>
-      </header>
-      <ol>
-        <li class="item-name">Green Salad</li>
-        <li class="item-name">Super Salad</li>
-        <li class="item-name">Spam Sandwich</li>
-      </ol>
-      <footer>
-        <h4 class="order-total">Order total: $30.99</h4>
-      </footer>
-    </article>
   </section>
   <section id="completed-orders">
     <h2 class="complete">Completed Orders</h2>

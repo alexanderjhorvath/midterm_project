@@ -4,7 +4,7 @@ const authToken = '7e5c956f63391cce53337fe3f3f4fc56';
 const client = require('twilio')(accountSid, authToken);
 exports = module.exports;
 
-function notification(name, number, stage){
+function notification(name, number, stage, time){
 
   const textContent = {
     to: number,
@@ -14,7 +14,7 @@ function notification(name, number, stage){
   if (stage == 1) {
     textContent.body = `You have a new order`;
   } else if (stage == 2) {
-    textContent.body = `Thanks ${name}! Your order has been confirmed! We will notify you when it's ready for pickup`;
+    textContent.body = `Thanks ${name}! Your order will be ready in ${time} minutes`;
   } else if (stage == 3) {
     textContent.body = `Your order is ready for pickup 🍔`;
   } else if (stage == 4) {

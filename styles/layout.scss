@@ -18,6 +18,11 @@ body {
   flex-direction: column;
 }
 
+h2 {
+  font-family: $josefin;
+  font-size: 4em;
+}
+
 main.container {
     width: 1000px;
     padding-top: 30px;

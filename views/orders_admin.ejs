@@ -28,11 +28,11 @@
     </header>
     <main class="container">
       <section id="active orders">
-        <h2>Active Orders</h2>
+        <h2>Orders</h2>
         <% orderDetailsObj.reverse().forEach(function(item) { %>
-          <% if (item.order_status == 1) { %>
+          <% if (item.order_status == 3) { %>
             <article class="active">
-          <% } else if (item.order_status == 2 || item.order_status ==3 ) { %>
+          <% } else if (item.order_status == 2 || item.order_status == 1 ) { %>
             <article class="in-progress">
           <% } else if (item.order_status == 4 ) { %>
             <article class="complete">
@@ -67,8 +67,8 @@
           <form method="POST" action="/orders/status">
             <input name="orderId" value= "<%= item.id %>" style="display: none">
             <% if (item.order_status == 1) { %>
-              <button id="order-button" type="submit" class="btn btn-primary">Confirm Order</button>
-                <select name="time" class="form-control" id="time">
+              <button id="order-button" type="submit" class="btn btn-secondary">Confirm Order</button>
+                <p>Estimate Preparation Time: </p><select label="Estimate Preparation Time:" name="time" class="form-control" id="time">
                   <option value="10">10 minutes</option>
                   <option value="20">20 minutes</option>
                   <option value="30">30 minutes</option>
@@ -77,9 +77,9 @@
                   <option value="60">60 minutes</option>
                 </select>
             <% } else if (item.order_status == 2 ) { %>
-              <button id="order-button" type="submit" class="btn btn-success">Order Ready</button>
+              <button id="order-button" type="submit" class="btn btn-secondary">Order Ready</button>
             <% } else if (item.order_status == 3 ) { %>
-              <button id="order-button" type="submit" class="btn btn-info">Picked Up</button>
+              <button id="order-button" type="submit" class="btn btn-secondary">Picked Up</button>
             <% } else if (item.order_status == 4 ) { %>
             <% } %>
           </form>
@@ -88,27 +88,6 @@
       </article>
         <% }); %>
       </section>
-      <section id="completed-orders">
-        <h2 class="complete">Completed Orders</h2>
-        <article class="complete">
-          <header class="order">
-            <div id="order-details">
-              <h3 class="order-id">Order Number: 34344</h3>
-              <p class="order-time">Order placed: Aug 24th, 9:28PM</p>
-            </div>
-            <div id="order-status">
-              <h3 class="order-status">Order Status: Completed</h3>
-            </div>
-          </header>
-          <ol>
-            <li class="item-name">Green Salad</li>
-            <li class="item-name">Super Salad</li>
-            <li class="item-name">Spam Sandwich</li>
-          </ol>
-          <footer>
-            <h4 class="order-total">Order total: $30.99</h4>
-          </footer>
-        </article>
     </main>
       </body>
     </html>

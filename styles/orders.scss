@@ -25,6 +25,20 @@ article.active:hover header {
   border-color: black;
 }
 
+article.placed header{
+  background-color: $dgrey;
+  padding: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border: $dgrey 1px;
+  padding-bottom: 2.5em;
+}
+
+article.placed:hover header {
+  background-color: $lgrey ;
+  border-color: black;
+}
+
 article.in-progress header{
   background-color: $dgrey;
   padding: 10px;

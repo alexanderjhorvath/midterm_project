@@ -247,7 +247,7 @@ app.put('/orders/status', (req, res) => {
 
     return Promise.all([
       dbHelpers.updateStatus(orderId),
-      dbHelpers.updateTime(orderId, timeStamp),
+      dbHelpers.updatePickupTime(orderId, timeStamp),
       dbHelpers.getStatus(orderId)
     ])
     .then(function(result) {

@@ -1,7 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <% include ./partials/_head %>
+    <title>Home Page</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/orders.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans|Raleway|Roboto:100i">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
   </head>
 
   <body class="other">
@@ -13,7 +30,13 @@
       <section id="active orders">
         <h2>Active Orders</h2>
         <% orderDetailsObj.reverse().forEach(function(item) { %>
-          <article class=<%= item.order_status %>>
+          <% if (item.order_status == 1) { %>
+            <article class="active">
+          <% } else if (item.order_status == 2 || item.order_status ==3 ) { %>
+            <article class="in-progress">
+          <% } else if (item.order_status == 4 ) { %>
+            <article class="complete">
+          <% } %>
         <header class="order">
           <div id="order-details">
             <h3 class="order-id">Order Number: <%= item.id %></h3>
@@ -41,60 +64,29 @@
           <% }) %>
         </ul>
         <footer>
-          <% if (item.order_status == 1) { %>
-            <button id="order-button" type="button" class="btn btn-primary">Confirm Order</button>
-          <% } else if (item.order_status == 2 ) { %>
-            <button id="order-button" type="button" class="btn btn-success">Order Ready</button>
-          <% } else if (item.order_status == 3 ) { %>
-            <button id="order-button" type="button" class="btn btn-info">Picked Up</button>
-          <% } else if (item.order_status == 4 ) { %>
-          <% } %>
+          <form method="POST" action="/orders/status">
+            <input name="orderId" value= "<%= item.id %>" style="display: none">
+            <% if (item.order_status == 1) { %>
+              <button id="order-button" type="submit" class="btn btn-primary">Confirm Order</button>
+                <select name="time" class="form-control" id="time">
+                  <option value="10">10 minutes</option>
+                  <option value="20">20 minutes</option>
+                  <option value="30">30 minutes</option>
+                  <option value="40">40 minutes</option>
+                  <option value="50">50 minutes</option>
+                  <option value="60">60 minutes</option>
+                </select>
+            <% } else if (item.order_status == 2 ) { %>
+              <button id="order-button" type="submit" class="btn btn-success">Order Ready</button>
+            <% } else if (item.order_status == 3 ) { %>
+              <button id="order-button" type="submit" class="btn btn-info">Picked Up</button>
+            <% } else if (item.order_status == 4 ) { %>
+            <% } %>
+          </form>
           <h4 class="order-total">Order total: $<%= array.reduce((a, b) => a + b) %>.00</h4>
         </footer>
       </article>
         <% }); %>
-        <article class="in-progress">
-          <header class="order">
-            <div id="order-details">
-              <h3 class="order-id">Order Number: 34344</h3>
-              <p class="order-time">Order placed: Aug 24th, 9:28PM</p>
-            </div>
-            <div id="order-status">
-              <h3 class="order-status">Order Status: Being Made</h3>
-              <h4 class="order-ready">Ready for pickup in: 34 minutes</h4>
-            </div>
-          </header>
-          <ol>
-            <li class="item-name">Green Salad</li>
-            <li class="item-name">Super Salad</li>
-            <li class="item-name">Spam Sandwich</li>
-          </ol>
-          <footer>
-            <button id="order-button" type="button" class="btn btn-success">Order Ready</button>
-            <h4 class="order-total">Order total: $30.99</h4>
-          </footer>
-        </article>
-        <article class="active">
-          <header class="order">
-            <div id="order-details">
-              <h3 class="order-id">Order Number: 34344</h3>
-              <p class="order-time">Order placed: Aug 24th, 9:28PM</p>
-            </div>
-            <div id="order-status">
-              <h3 class="order-status">Order Status: Ready!</h3>
-              <h4 class="order-ready">Ready for pickup</h4>
-            </div>
-          </header>
-          <ol>
-            <li class="item-name">Green Salad</li>
-            <li class="item-name">Super Salad</li>
-            <li class="item-name">Spam Sandwich</li>
-          </ol>
-          <footer>
-            <button id="order-button" type="button" class="btn btn-info">Picked Up</button>
-            <h4 class="order-total">Order total: $30.99</h4>
-          </footer>
-        </article>
       </section>
       <section id="completed-orders">
         <h2 class="complete">Completed Orders</h2>

@@ -128,6 +128,18 @@ function updatePickupTime(orderId, timeReady) {
 
 exports.updatePickupTime = updatePickupTime;
 
+//Retrieves order status
+function getStatus(orderId) {
+  return knex.select('order_status')
+  .from('orders')
+  .where({ id:orderId })
+  .then(function(rows) {
+    return rows;
+  });
+}
+
+exports.getStatus = getStatus;
+
 function addMenuItem(addName, addCost, addPrice, addDescription, addUrl, addInventory, addCategory) {
   return knex.insert({
     name: addName,

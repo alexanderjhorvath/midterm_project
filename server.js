@@ -233,7 +233,7 @@ function compareOrders(a, b) {
 }
 
 
-app.put('/orders/status', (req, res) => {
+app.post('/orders/status', (req, res) => {
   // Takes order ID submitted in request to access correct order in database
   let orderId = req.body.orderId;
   // If time information is sent in request, update pickup time in database
@@ -247,13 +247,12 @@ app.put('/orders/status', (req, res) => {
 
     return Promise.all([
       dbHelpers.updateStatus(orderId),
-      dbHelpers.updateTime(orderId, timeStamp),
+      dbHelpers.updatePickupTime(orderId, timeStamp),
       dbHelpers.getStatus(orderId)
     ])
     .then(function(result) {
-      if (result[2] == 2) { // if order status is 'confirmed', text customer
-        twilioHelper.notification('NAME', '7786971129', status, readyMinutes);
-      }
+      console.log('made it ');
+      twilioHelper.notification('NAME', '7786971129', result[2].order_status, readyMinutes);
       res.redirect('/orders');
     })
   } else { // if no time information is sent in request:
@@ -261,10 +260,8 @@ app.put('/orders/status', (req, res) => {
       dbHelpers.updateStatus(orderId),
       dbHelpers.getStatus(orderId)
   ]).then(function(result) {
-    if (result[1] == 2) {
-      twilioHelper.notification('NAME', '7786971129', status);
-    }
-    res.redirect('/orders');
+      twilioHelper.notification('NAME', '7786971129', result[1].order_status, 0);
+      res.redirect('/orders');
     })
   }
 });

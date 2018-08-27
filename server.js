@@ -134,7 +134,7 @@ app.get('/orders', (req, res) => {
         orderArray.push(item);
       })
       templateVars.orderObj = orderArray.sort(compareOrders);
-      res.render('orders', templateVars);
+      res.render('orders_admin', templateVars);
     })
   } else {
     return Promise.all([

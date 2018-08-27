@@ -12,27 +12,39 @@
     <main class="container">
       <section id="active orders">
         <h2>Active Orders</h2>
-        <article class="in-progress">
-          <header class="order">
-            <div id="order-details">
-              <h3 class="order-id">Order Number: 34344</h3>
-              <p class="order-time">Order placed: Aug 24th, 9:28PM</p>
-            </div>
-            <div id="order-status">
-              <h3 class="order-status">Order Status: Unconfirmed</h3>
-              <h4 class="order-ready">Awaiting Confirmation</h4>
-            </div>
-          </header>
-          <ol>
-            <li class="item-name">Green Salad</li>
-            <li class="item-name">Super Salad</li>
-            <li class="item-name">Spam Sandwich</li>
-          </ol>
-          <footer>
-            <button id="order-button" type="button" class="btn btn-primary">Confirm Order</button>
-            <h4 class="order-total">Order total: $30.99</h4>
-          </footer>
-        </article>
+        <% orderDetailsObj.reverse().forEach(function(item) { %>
+          <article class=<%= item.order_status %>>
+        <header class="order">
+          <div id="order-details">
+            <h3 class="order-id">Order Number: <%= item.id %></h3>
+            <p class="order-time">Order placed: <%= item.time.toLocaleDateString('en-US', { timeZone: 'America/Vancouver', month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'}) %></p>
+          </div>
+          <div id="order-status">
+            <% if (item.order_status == 1) { %>
+              <h3 class="order-status">Order Status: Placed</h3>
+            <% } else if (item.order_status == 2 ) { %>
+              <h3 class="order-status">Order Status: In progress</h3>
+            <% } else if (item.order_status == 3 ) { %>
+              <h3 class="order-status">Order Status: Ready for pickup</h3>
+            <% } else if (item.order_status == 4 ) { %>
+              <h3 class="order-status">Order Status: Picked up</h3>
+            <% } %>
+            <h4 class="order-ready">ETA </h4>
+          </div>
+        </header>
+        <ul>
+            <% var array = []; %>
+          <% orderObj.forEach(function(item2) { %>
+            <% if (item2.id === item.id) { %>
+          <li class="item-name"><%= item2.quantity %> <%= item2.name %> - $<%= item2.price %>  <% array.push(item2.price * item2.quantity) %></li>
+          <% } %>
+          <% }) %>
+        </ul>
+        <footer>
+          <h4 class="order-total">Order total: $<%= array.reduce((a, b) => a + b) %>.00</h4>
+        </footer>
+      </article>
+        <% }); %>
         <article class="in-progress">
           <header class="order">
             <div id="order-details">

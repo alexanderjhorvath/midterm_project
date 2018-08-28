@@ -11,8 +11,10 @@ Franklin's is a full stack web application built around Node and Express that al
 
 ## Final Product
 
-!["screenshot description"](#)
-!["screenshot description"](#)
+!["Front page of Franklin's"](https://github.com/tantousha/midterm_project/blob/master/docs/Screen%20Shot%202018-08-27%20at%207.22.49%20PM.png)
+!["Customer's menu page showing the dropdown cart"](https://github.com/tantousha/midterm_project/blob/master/docs/Screen%20Shot%202018-08-27%20at%207.23.14%20PM.png)
+!["Order history page showing various statuses"](https://github.com/tantousha/midterm_project/blob/master/docs/Screen%20Shot%202018-08-27%20at%207.24.06%20PM.png)
+!["Owner's menu page showing 'add item' functionality"](https://github.com/tantousha/midterm_project/blob/master/docs/Screen%20Shot%202018-08-27%20at%207.24.17%20PM.png)
 
 ## Dependencies
 

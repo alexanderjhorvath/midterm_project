@@ -1,30 +1,36 @@
-# Jamie, Guy and Alex's Midterm Project
+# Midterm Project: Franklin's
 
-## Project Setup
+Franklin's is a full stack web application built around Node and Express that allows a restaurant owner to accept orders online through a server. Franklin's includes the following functionality:
 
-1. Create your own empty repo on GitHub
-3. Numerical order is key.
-2. Clone this repository (do not fork)
-  - Suggestion: When cloning, specify a different folder name that is relevant to your project
-3. Remove the git remote: `git remote rm origin`
-4. Add a remote for your origin: `git remote add origin <your github repo URL>`
-5. Push to the new origin: `git push -u origin master`
-6. Verify that the skeleton code now shows up in your repo on GitHub
+1. Customers can select items from a menu and checkout using the shopping cart.
+2. Restaurant owners can add new menu items directly from the site itself.
+3. Backend database records the actual cost and quantity of items for business analytics.
+4. Customers and the Owner are notified of order status changes via text message.
+5. Site design is responsive and will scale to a multitude of screen sizes.
+6. Multiple order statuses (including functionality for the Owner to specify prep time) allows both the Customer and Owner to see the exact state of their order.
 
-## Getting Started
+## Final Product
 
-1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
-2. Update the .env file with your correct local information
-3. Install dependencies: `npm i`
-4. Fix to binaries for sass: `npm rebuild node-sass`
-5. Run migrations: `npm run knex migrate:latest`
-  - Check the migrations folder to see what gets created in the DB
-6. Run the seed: `npm run knex seed:run`
-  - Check the seeds file to see what gets seeded in the DB
-7. Run the server: `npm run local`
-8. Visit `http://localhost:8080/`
+!["screenshot description"](#)
+!["screenshot description"](#)
 
 ## Dependencies
 
-- Node 5.10.x or above
-- NPM 3.8.x or above
+- Node.js
+- Express
+- EJS
+- Bootstrap
+- Body-Parser
+- Cookie-Parser
+- jQuery
+- Knex
+- SASS
+- Morgan
+- PG
+- Popper.js
+- Twilio
+
+## Getting Started
+
+- Install all dependencies (using the `npm install` command).
+- Run the development web server using the `npm start` command.

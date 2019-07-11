@@ -12,23 +12,23 @@
   "author": "Lighthouse Labs",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.15.2",
+    "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
     "cookie-parser": "^1.4.4",
     "dotenv": "^2.0.0",
-    "ejs": "^2.4.1",
-    "express": "^4.16.4",
-    "jquery": "^3.3.1",
-    "knex": "^0.16.3",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "jquery": "^3.4.1",
+    "knex": "^0.16.5",
     "knex-logger": "^0.1.0",
     "morgan": "^1.9.1",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.12.0",
     "node-sass-middleware": "^0.9.8",
     "pg": "^6.0.2",
-    "popper.js": "^1.14.7",
-    "twilio": "^3.29.2"
+    "popper.js": "^1.15.0",
+    "twilio": "^3.33.1"
   },
   "devDependencies": {
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.19.1"
   }
 }
